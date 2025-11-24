@@ -1,0 +1,380 @@
+{
+  "Content": {
+    "hi": "Welcome",
+    "title": "Hi, I am Dogan MERDEN",
+    "work": "Working as a frontend developer at an international company"
+  },
+  "Navigation": {
+    "homeBtn": "Home",
+    "nameBtn": "Name",
+    "workBtn": "login"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ar {العربيه} en {English} other {Unknown}}"
+  },
+  "loginWords": {
+    "welcome": "Welcome back !",
+    "tagline": "Enjoy a different rental experience with the Skillvera platform",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "login": "Log in",
+    "no_account": "Don’t have an account?",
+    "signup": "Sign Up",
+    "loading": "loading"
+  },
+  "resetPassWords": {
+    "reset": " Reset Password ",
+    "associated": "Enter the mail address associated with your account",
+    "email": "Email",
+    "send": "Send Email",
+    "goBack": "Go Back to Login"
+  },
+  "signup": {
+    "title": "Skillvera",
+    "subtitle": "Start your perfect Rent Journey",
+    "full_name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "signup": "Sign Up",
+    "signing_up": "Signing Up...",
+    "have_account": "Already have an account?",
+    "login": "Log in",
+    "error": "Something went wrong",
+    "phone":"your phone"
+  },
+  "verify": {
+    "title": "Enter verification code",
+    "subtitle": "The verification code has been sent to your email",
+    "resend": "Resend after {seconds} seconds",
+    "back": "Back",
+    "resendBtn": "Resend Code",
+    "verifyBtn":"verify code"
+  },
+  "resetPasswordWords": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password below.",
+    "new_password": "New password",
+    "confirm_password": "Re-enter new password",
+    "button": "Reset Password",
+    "loading": "Loading...",
+    "not_match": "Passwords do not match",
+    "error": "Something went wrong",
+    "success":"password changed successfully"
+  },
+  "navbar": {
+    "logo": "Logo here",
+    "home": "Home",
+    "facilities": "All facilities",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "become_host": "Become a host",
+    "signup": "Sign Up",
+    "account": "Account",
+    "support": "Support & Help",
+    "login": "Login or signup",
+    "logout": "Logout"
+  },
+  "Hero": {
+    "slogan": "Slogan should be here with one or two good sentences",
+    "explore": "Explore now"
+  },
+  "Search": {
+    "place": "Place",
+    "placePlaceholder": "Search by location",
+    "category": "Category",
+    "categoryPlaceholder": "Filter by category",
+    "hotel": "Hotel",
+    "apartment": "Apartment",
+    "villa": "Villa",
+    "from": "From",
+    "to": "To",
+    "results": "Search Results:",
+    "start":"Add Start Date",
+    "end":"Add End Date"
+  },
+  "categories": {
+    "title": "Our Facilities",
+    "all": "Some Facilities",
+    "rooms": "Rooms",
+    "sports": "Sports fields",
+    "labs": "Labs",
+    "login_required": "You must log in first",
+    "ok": "OK",
+    "see_all": "See all"
+  },
+   "card":{
+    "more":"More Details"
+  },
+  "map":{
+    "title":"Explore The Nearest Facility To You!",
+    "subtitle":"Click on any Facility to see more details."
+  },
+  "trusted": {
+    "trustedBy": "Trusted by top",
+    "enterprices": "Enterprices",
+    "inSaudi": "in Saudi Arabia"
+  },
+  "features": {
+    "subtitle": "We deliver best solution",
+    "title": "One application with multiple options to give you freedom of enroll & enjoy your activity",
+    "planningTitle": "Planning",
+    "planningDesc": "Map the crypto projects scope with framer template",
+    "prototypeTitle": "Prototype",
+    "prototypeDesc": "Build crypto website test for your product",
+    "refinementTitle": "Refinement",
+    "refinementDesc": "Refine & improve your crypto landing page",
+    "scaleTitle": "Scale and support",
+    "scaleDesc": "Deploy product live and ensure expert support"
+  },
+  "download": {
+    "title": "Explore our mobile app and join your nearest activity now on",
+    "appName": "App Name",
+    "downloadApp": "Download app",
+    "googlePlay": "Download on the Play Store",
+    "appStore": "Download on the App Store",
+    "scanNow": "Scan to get the app now"
+  },
+  "profile": {
+    "title": "My profile",
+    "about": "About me",
+    "reservations": "Past reservation",
+    "reviews": "My reviews",
+    "favorites": "My favorites"
+  },
+  "proPhoto":{
+  "aboutTitle": "About me",
+  "choose": "Choose image",
+  "uploading": "Uploading...",
+  "save": "Save",
+  "completeTitle": "Complete your profile",
+  "completeDesc": "Add a profile picture and some info to complete your profile.",
+  "namePlaceholder": "Your name",
+  "getStarted": "Get Started"
+},
+
+  "favorites": {
+    "title": "My favorites",
+    "loading": "Loading...",
+    "emptyMessage": "You have not added any favorites yet.",
+    "exploreButton": "Explore Now",
+    "product": "Product",
+    "category": "Category",
+    "addedOn": "Added On"
+  },
+   "reservations": {
+    "title": "Past reservations",
+    "loading": "Loading...",
+    "emptyMessage": "You'll find your past reservations here after your first rent.",
+    "rentNow": "Rent Now",
+    "name": "Name",
+    "date": "Reservation Date"
+  },
+  "reviews": {
+    "title": "My reviews",
+    "loading": "Loading...",
+    "emptyMessage": "You have not written any reviews yet.",
+    "rentNow": "Rent Now",
+    "review": "Review",
+    "date": "Date"
+  },
+
+  
+ 
+ 
+  "footer": {
+    "main": "Main Page",
+    "mainLinks": [
+      { "label": "All Products", "href": "/products" },
+      { "label": "About Skillvera Rent", "href": "/userview/aboutUS" },
+      { "label": "Products Map", "href": "/map" },
+      { "label": "I'm an Owner!", "href": "/owner" }
+    ],
+
+    "about": "About Skillvera Rent",
+    "aboutLinks": [
+      { "label": "About Skillvera Rent", "href": "/userview/aboutUS" },
+      { "label": "Team", "href": "/team" },
+      { "label": "Careers", "href": "/careers" },
+      { "label": "Blog", "href": "/blog" }
+    ],
+
+    "support": "Support",
+    "supportLinks": [
+      { "label": "Contact Us", "href": "/userview/contactUs" },
+      { "label": "FAQ", "href": "/userview/FAQpage" },
+      { "label": "Terms & Conditions", "href": "/terms" },
+      { "label": "Help & Support", "href": "/support" }
+    ],
+
+    "apps": "Our Apps",
+    "appsLinks": [
+      { "label": "App Store", "href": "https://apps.apple.com" },
+      { "label": "Google Play", "href": "https://play.google.com" }
+    ],
+
+    "brand": "Skillvera Rent"
+  },
+
+  
+  "filters": {
+    "category": "All Category",
+    "location": "Location",
+    "maxPrice": "Max Price",
+    "sports": "Sports",
+    "education": "Education",
+    "health": "Hotals",
+    "riyadh": "Riyadh",
+    "jeddah": "Jeddah"
+  },
+  "pagination": {
+    "prev": "Prev",
+    "next": "Next"
+  },
+  "facility": {
+    "priceUnit": "{price} R"
+  },
+  
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Be In Touch With Our Team",
+    "teamTitle": "Contact Our Team",
+    "teamDesc": "Contact us via WhatsApp or email for more information and support, we are here for you.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "message": "Your Message",
+    "agree": "I agree to the Terms of Service and Privacy Policy",
+    "contactUs": "Contact Us",
+    "directChat": "Direct Chat"
+  },
+  
+  "about": {
+    "title": "About us",
+    "subtitle": "Know More About Skillvera"
+  },
+  "benefits": {
+    "responsable": "Responsible Team",
+    "benefit1": "Benefit",
+    "benefit2": "Benefit 2",
+    "benefit3": "Benefit 3",
+    "text": "Lorem ipsum dolor sit amet..."
+  },
+  "story": {
+    "title": "Our Story",
+    "text": "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet..."
+  },
+  "testimonials": {
+    "subtitle": "Happy Viewers",
+    "title": "Why Choose Us"
+  },
+  "rating":{
+  "title": "Guest Rating",
+  "description": "This facility is rated based on guest ratings and reviews."
+  },
+  
+  "review": {
+    "showMore": "Show More",
+    "stayed": "Stayed {nights} nights"
+  },
+  
+  "thingsToKnow": {
+    "title": "Things to know",
+    "rulesTitle": "Facility rules",
+    "policiesTitle": "Facility Policies",
+    "rules": [
+      "Leave before 12 pm",
+      "No smoking inside",
+      "No pets allowed"
+    ],
+    "policies": "Room was very clean and looked just like the photo. Quiet little hotel, especially during the day. Evening you hear some music from nearby places.",
+    "showMore": "Show More"
+  },
+  
+  "facilityMap": {
+    "title": "This Facility is in : {location}",
+    "info": "Facility Information & Features",
+    "noFeatures": "No features added yet.",
+    "popup": "Facility location ({lat}, {lng})"
+  },
+  
+  "facilityHeader": {
+    "ratingCount": "({count})",
+    "priceUnit": "{price}/DAY",
+    "overview": "Overview",
+    "share": "Share",
+    "save": "Save"
+  },
+  
+  "FacilityCalendar": {
+    "selectCheckIn": "Select check-in date",
+    "clearDates": "Clear dates",
+    "forDays": "for {count} days",
+    "checkIn": "CHECK-IN",
+    "checkOut": "CHECK-OUT",
+    "pleaseSelect": "Please select your dates to rent",
+    "rentNow": "Rent now"
+  },
+  
+  "FAQ": {
+    "title": "FAQ",
+    "subtitle": "Frequently Asked Questions",
+    "description": "Did you find the question as you expected?",
+    "readMore": "Read More",
+    "cta": "Give a Quote",
+    "items": [
+      {
+        "question": "What services do you provide?",
+        "answer": "We offer a wide range of services including web development, mobile apps, and design."
+      },
+      {
+        "question": "How long does a project take?",
+        "answer": "Project duration depends on the scope, usually between 2 to 6 weeks."
+      },
+      {
+        "question": "Do you offer support after delivery?",
+        "answer": "Yes, we provide free bug fixes for 1 month and optional long-term support."
+      },
+      {
+        "question": "What are your payment methods?",
+        "answer": "We accept bank transfer, PayPal, and credit card payments."
+      },
+      {
+        "question": "Can you work with international clients?",
+        "answer": "Yes, we collaborate with clients worldwide through remote communication tools."
+     }
+
+    ]
+  },
+  
+  "userprofile": {
+    "title": "My profile",
+    "desc": "Hosts and guests can see your profile and it may appear across Skava to help us build trust in our community",
+    "phone": "Phone",
+    "dob": "Date of Birth",
+    "location": "Current Location",
+    "gender": "Gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "save": "Get Started",
+    "fetchingLocation": "Fetching current location...",
+    "unableLocation": "Unable to fetch location",
+    "fullName":"Full Name"
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
