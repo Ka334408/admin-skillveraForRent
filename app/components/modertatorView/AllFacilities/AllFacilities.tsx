@@ -2,7 +2,8 @@ import React from 'react'
 import FacilitiesAreaChart from '../../modertatorView/mainComponent/AreaChart'
 import FacilitiesRequestList from '../../modertatorView/mainComponent/Requests'
 import UsersInteraction from '../../modertatorView/mainComponent/UserInteractions'
-import StatsCards from '../mainComponent/statsCards'
+import StatsCards from '../../adminview/mainComponent/statsCards'
+
 
 export default function AllFacilities() {
   return (
