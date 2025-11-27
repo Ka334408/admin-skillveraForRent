@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import GuestPage from "@/app/components/protectedpages/guestPage";
+
 import axiosInstance from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 
@@ -46,7 +46,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <GuestPage>
+   
       <main className="min-h-screen bg-gray-200 flex items-center justify-center px-4 dark:bg-[#0a0a0a]">
         <div className="bg-white rounded-2xl shadow-lg w-full max-w-4xl min-h-[550px] flex flex-col md:flex-row overflow-hidden dark:bg-black">
 
@@ -89,6 +89,6 @@ export default function ResetPassword() {
           </div>
         </div>
       </main>
-    </GuestPage>
+
   );
 }

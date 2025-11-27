@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import GuestPage from "@/app/components/protectedpages/guestPage";
+
 import axiosInstance from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 import { Eye, EyeOff, Check, X, AlertCircle, CheckCircle } from "lucide-react";
@@ -83,7 +83,7 @@ export default function ResetPassword() {
 
   return (
     <div>
-      <GuestPage>
+     
         <main
           dir={locale === "ar" ? "rtl" : "ltr"}
           className="min-h-screen bg-gray-200 flex items-center justify-center px-4 dark:bg-[#0a0a0a]"
@@ -169,7 +169,7 @@ export default function ResetPassword() {
             </form>
           </div>
         </main>
-      </GuestPage>
+     
     </div>
   );
 }
