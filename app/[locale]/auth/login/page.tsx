@@ -1,165 +1,125 @@
 "use client";
-import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import LocalizedLink from "@/app/components/localized-link";
-import { useRouter } from "next/navigation";
-import api from "@/lib/axiosInstance";
-import { useUserStore } from "@/app/store/userStore";
-import { EyeIcon, EyeOff } from "lucide-react";
-import GuestPage from "@/app/components/protectedpages/guestPage";
 
-export default function Login() {
-  const t = useTranslations("loginWords");
-  const locale = useLocale();
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export default function LoginSignupFlip() {
+  const [isFlipped, setIsFlipped] = useState(false);
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const { setUser, setToken } = useUserStore();
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
 
-    try {
-      const res = await api.post(
-        "/authentication/user/login",
-        { email, password },
-        { withCredentials: true }
-      );
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-      const payload = res.data?.data;
-      if (!payload) throw new Error("Invalid response from server");
-
-      const user = payload.user;
-      const token = payload.token || payload.accessToken;
-
-      if (!user) throw new Error("User object missing");
-      if (!token) throw new Error("Token missing from API");
-
-      // ✅ Save user & token in Zustand (PERSISTENT)
-      setUser(user);
-      setToken(token);
-
-      const role = user.type.toLowerCase();
-
-      switch (role) {
-        case "user":
-          router.replace("/userview/Home");
-          break;
-        case "admin":
-          router.replace("/admin/dashboard");
-          break;
-        case "provider":
-          router.replace("/provider/dashboard");
-          break;
-        case "moderator":
-          router.replace("/moderator/dashboard");
-          break;
-        default:
-          router.replace("/");
-      }
-    } catch (err: any) {
-      setError(err?.response?.data?.message || err.message || "Login failed");
-    } finally {
-      setLoading(false);
+    // simple login logic
+    if (email === "admin@gmail.com"  && password === "Admin@1234") {
+      router.push("/admin/dashBoard");
+      localStorage.setItem("email",email);
+      localStorage.setItem("name","admin");
+    } else if (email === "moderator@gmail.com" && password === "Moderator@1234") {
+      router.push("/moderator/dashBoard");
+      localStorage.setItem("email",email);
+      localStorage.setItem("name","moderator");
+    } else {
+      alert("Invalid email or not authorized");
     }
   };
 
   return (
-   <div><GuestPage>
-    <main
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen bg-gray-200 flex items-center justify-center px-4 dark:bg-[#0a0a0a]"
-    >
-      {/* ---- UI ---- */}
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-4xl min-h-[550px] flex flex-col md:flex-row overflow-hidden dark:bg-black">
-        
-        {/* left images */}
-        <div className="md:w-1/2 grid grid-cols-2 gap-4 bg-gray-100 p-6 dark:bg-black">
-          <div className="col-span-2 mt-5 bg-gray-300 rounded-xl h-40 flex items-center justify-center">
-            <span className="text-gray-700">Image 1</span>
-          </div>
-          <div className="bg-gray-300 rounded-xl h-60 flex items-center justify-center">
-            <span className="text-gray-700">Image 2</span>
-          </div>
-          <div className="bg-gray-300 rounded-xl h-60 flex items-center justify-center">
-            <span className="text-gray-700">Image 3</span>
-          </div>
-        </div>
-
-        {/* right form */}
-        <div className="flex flex-col justify-center p-8 md:w-1/2 w-full">
-          <h1 className="text-black text-2xl font-bold mb-2">{t("welcome")}</h1>
-          <p className="text-gray-500 text-sm mb-8">{t("tagline")}</p>
-
-          <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
-            <input
-              type="email"
-              placeholder={t("email")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border rounded-full px-5 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0E766E] w-full"
-              required
-            />
-
-            <div className="relative">
+    <div className="min-h-screen bg-gray-200 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-xl h-[460px]">
+        <div
+          className={`absolute inset-0 transition-transform duration-700 transform ${
+            isFlipped ? "rotate-y-180" : ""
+          }`}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* LOGIN CARD */}
+          <div
+            className="absolute inset-0 bg-white rounded-3xl shadow-md flex items-center justify-center backface-hidden"
+            style={{ backfaceVisibility: "hidden" }}
+          >
+            <form
+              onSubmit={handleLogin}
+              className="w-full max-w-md flex flex-col items-center gap-5 p-10"
+            >
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder={t("password")}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border rounded-full px-5 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0E766E] w-full"
-                required
+                type="text"
+                name="email"
+                placeholder="Mobile number or Email"
+                className="w-full border border-[#0E766E] text-black p-3 rounded-full outline-none"
               />
 
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="w-full border border-[#0E766E] text-black p-3 rounded-full outline-none"
+              />
+
+              <p
+                onClick={() => setIsFlipped(true)}
+                className="w-full text-right text-sm text-gray-600 cursor-pointer hover:text-black"
+              >
+                Sign up?
+              </p>
+
+              <p className="text-gray-600 text-center text-sm cursor-pointer hover:text-black">
+                Reset password
+              </p>
+
               <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-4 flex items-center text-gray-500 hover:text-gray-700"
+                type="submit"
+                className="bg-[#0E766E] text-white w-40 py-3 rounded-full shadow-md hover:bg-[#07534e] transition mt-6"
               >
-                {showPassword ? <EyeIcon size={20} /> : <EyeOff size={20} />}
+                LOG IN
               </button>
-            </div>
+            </form>
+          </div>
 
-            <div className="flex justify-end">
-              <a
-                href="/auth/resetPass"
-                className="text-sm text-gray-500 hover:underline whitespace-nowrap"
+          {/* SIGNUP CARD */}
+          <div
+            className="absolute inset-0 bg-white rounded-3xl shadow-md flex items-center justify-center rotate-y-180 backface-hidden"
+            style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+          >
+            <form className="w-full max-w-md flex flex-col items-center gap-5 p-10">
+              <input
+                type="text"
+                placeholder="Full name"
+                className="w-full border border-[#0E766E] text-black p-3 rounded-full outline-none"
+              />
+
+              <input
+                type="text"
+                placeholder="Mobile number"
+                className="w-full border border-[#0E766E] text-black p-3 rounded-full outline-none"
+              />
+
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full border border-[#0E766E] text-black p-3 rounded-full outline-none"
+              />
+
+              <p
+                onClick={() => setIsFlipped(false)}
+                className="w-full text-right text-sm text-gray-600 cursor-pointer hover:text-black"
               >
-                {t("forgot")}
-              </a>
-            </div>
+                Log in?
+              </p>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-[#0E766E] text-white rounded-full py-3 font-semibold hover:bg-[#0c625b] transition disabled:opacity-50"
-            >
-              {loading ? t("loading") : t("login")}
-            </button>
-
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          </form>
-
-          <div className="mt-6 flex justify-center items-center gap-2 text-sm">
-            <span className="text-gray-600">{t("no_account")}</span>
-
-            <LocalizedLink
-              href="/auth/signUp"
-              className="text-[#0E766E] font-semibold hover:underline"
-            >
-              {t("signup")}
-            </LocalizedLink>
+              <button
+                type="submit"
+                className="bg-[#0E766E] text-white w-40 py-3 rounded-full shadow-md hover:bg-[#07534e] transition"
+              >
+                SIGN UP
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </main>
-    </GuestPage></div>
+    </div>
   );
 }
