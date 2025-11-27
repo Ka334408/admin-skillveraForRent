@@ -1,9 +1,10 @@
 import React from 'react'
-import Topbar from '../mainComponent/topBar'
+
 import ProvidersList from './Providerstable'
 import FacilitiesRequestList from '../../modertatorView/mainComponent/Requests'
 import UsersInteraction from '../../modertatorView/mainComponent/UserInteractions'
-import StatsCards from '../mainComponent/statsCards'
+import StatsCards from '../../adminview/mainComponent/statsCards'
+
 
 export default function Providers() {
   return (

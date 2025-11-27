@@ -2,7 +2,8 @@ import React from 'react'
 import FacilitiesAreaChart from '../../modertatorView/mainComponent/AreaChart'
 import StatsChart from '../../modertatorView/mainComponent/BarChart'
 import FacilitiesRequestList from '../../modertatorView/mainComponent/Requests'
-import StatsCards from '../mainComponent/statsCards'
+import StatsCards from '../../adminview/mainComponent/statsCards'
+
 
 export default function Finance() {
   return (
