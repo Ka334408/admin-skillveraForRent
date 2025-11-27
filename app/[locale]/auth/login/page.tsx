@@ -7,7 +7,7 @@ export default function LoginSignupFlip() {
   const [isFlipped, setIsFlipped] = useState(false);
   const router = useRouter();
 
-  const handleLogin = (e) => {
+  const handleLogin = (e:any) => {
     e.preventDefault();
 
     const email = e.target.email.value;
