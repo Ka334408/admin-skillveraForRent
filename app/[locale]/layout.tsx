@@ -35,7 +35,7 @@ export default async function LocaleLayout({
               <div className="flex flex-col min-h-screen">
                
                 <main className="flex-1">{children}</main>
-                <div><Footer/></div>
+                <div></div>
               </div>
             </ThemeProvider>
           </AOSProvider>
