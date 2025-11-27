@@ -1,4 +1,5 @@
-import Providers from '@/app/components/adminview/providers/providers'
+
+import Providers from '@/app/components/adminview/providers/Providers'
 import React from 'react'
 
 export default function page() {
