@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import GuestPage from "@/app/components/protectedpages/guestPage";
 import axiosInstance from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 
@@ -91,7 +90,7 @@ export default function VerifyAccount() {
   };
 
   return (
-    <GuestPage>
+    
       <main className="min-h-screen flex items-center justify-center px-4">
         <div className=" rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
           <h1 className="text-2xl font-bold mb-2 text-gray-800">
@@ -140,6 +139,6 @@ export default function VerifyAccount() {
           </p>
         </div>
       </main>
-    </GuestPage>
+    
   );
 }

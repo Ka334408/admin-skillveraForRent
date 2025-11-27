@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import GuestPage from "@/app/components/protectedpages/guestPage";
+
 import api from "@/lib/axiosInstance";
 import { CheckCircle, AlertCircle, EyeIcon, EyeOff } from "lucide-react";
 import { useUserStore } from "@/app/store/userStore";
@@ -62,7 +62,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <GuestPage>
+      
         <main
           dir={locale === "ar" ? "rtl" : "ltr"}
           className="min-h-screen bg-gray-200 flex items-center justify-center px-4 dark:bg-[#0a0a0a]"
@@ -189,7 +189,7 @@ export default function SignUp() {
             </div>
           </div>
         </main>
-      </GuestPage>
+      
     </div>
   );
 }
