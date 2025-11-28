@@ -130,7 +130,7 @@ export default function StatsChart({
       {/* Footer - View All */}
       <div className="flex justify-end mt-3">
         <button className="text-sm text-teal-700 hover:underline" onClick={()=> {localStorage.getItem("name")==="admin" ?
-        router.push(`${locale}/admin/AllFacilities/FacilitiesList`):router.push(`/moderator/AllFacilities/FacilitiesList`)}}>
+        router.push(`/${locale}/admin/AllFacilities/FacilitiesList`):router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`)}}>
           View all →
         </button>
       </div>
