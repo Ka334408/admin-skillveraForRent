@@ -1,4 +1,6 @@
 import { Filter, ChevronDown } from 'lucide-react';
+import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
@@ -16,6 +18,8 @@ export default function MiddleChart() {
         { month: "8", value: 880 },
         { month: "9", value: 250 },
     ];
+    const router = useRouter();
+        const locale = useLocale();
   return (
     <div>
        {/* ---------- Chart ---------- */}
@@ -45,7 +49,9 @@ export default function MiddleChart() {
                 </div>
 
                 <div className="text-right mt-2">
-                    <button className="text-[#0E766E] font-medium flex items-center gap-1 float-right">
+                    <button className="text-[#0E766E] font-medium flex items-center gap-1 float-right"
+                    onClick={()=> {localStorage.getItem("name")==="admin" ?
+        router.push(`/${locale}/admin/AllFacilities/FacilitiesList`):router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`)}}>
                         View all →
                     </button>
                 </div>

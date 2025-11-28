@@ -1,4 +1,6 @@
 import { Eye } from 'lucide-react'
+import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function RequestFeedBack({request , feedBack}:{request : string , feedBack:string}) {
@@ -23,6 +25,8 @@ export default function RequestFeedBack({request , feedBack}:{request : string ,
         { id: "#19", text: "User44 Added New Rating" },
         { id: "#19", text: "User49 Added New Rating" },
     ];
+    const router = useRouter();
+    const locale = useLocale();
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -42,7 +46,9 @@ export default function RequestFeedBack({request , feedBack}:{request : string ,
                             </div>
                         ))}
                     </div>
-                    <button className="text-[#0E766E] mt-3 font-medium flex items-center gap-1">
+                    <button className="text-[#0E766E] mt-3 font-medium flex items-center gap-1"
+                    onClick={()=> {localStorage.getItem("name")==="admin" ?
+        router.push(`/${locale}/admin/AllFacilities/FacilitiesList`):router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`)}}>
                         View all →
                     </button>
                 </div>

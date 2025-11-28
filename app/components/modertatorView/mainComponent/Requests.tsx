@@ -1,11 +1,16 @@
 "use client";
 
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+
 export default function FacilitiesRequestList() {
   const requests = [
     { id: 123, text: "Added A New Facility" },
     { id: 100, text: "Added A New Facility" },
     { id: 19, text: "Request Edited Facility" },
   ];
+  const router = useRouter();
+  const locale = useLocale();
 
   return (
     <div className="bg-white p-5 rounded-xl shadow-sm w-full">
@@ -28,7 +33,9 @@ export default function FacilitiesRequestList() {
       </div>
 
       <div className="flex justify-end mt-3">
-        <button className="text-sm text-teal-700 hover:underline">
+        <button className="text-sm text-teal-700 hover:underline"
+        onClick={()=> {localStorage.getItem("name")==="admin" ?
+        router.push(`/${locale}/admin/AllFacilities/FacilitiesList`):router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`)}}>
           View all →
         </button>
       </div>

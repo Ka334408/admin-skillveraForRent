@@ -17,7 +17,7 @@ export default function ProvidersTable() {
       status: "Pending",
       num: 0,
       balance: "—",
-      img: "https://i.pravatar.cc/40?img=15",
+      img: "https://i.pravatar.cc/40?img=10",
     },
     {
       id: 15,
@@ -35,16 +35,16 @@ export default function ProvidersTable() {
       status: "Pending",
       num: 0,
       balance: "—",
-      img: "https://i.pravatar.cc/40?img=15",
+      img: "https://i.pravatar.cc/40?img=10",
     },
     {
       id: 222,
       name: "Lindsey Stroud",
       email: "indsey.stroud@gmail.com",
       status: "Active",
-      num: 0,
-      balance: "—",
-      img: "https://i.pravatar.cc/40?img=32",
+      num: 2,
+      balance: "300 SAR",
+      img: "https://i.pravatar.cc/40?img=12",
     },
   ];
 
