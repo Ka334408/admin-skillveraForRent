@@ -5,6 +5,7 @@ import UsersInteraction from '../../modertatorView/mainComponent/UserInteraction
 import StatsCards from '../mainComponent/statsCards'
 import ProvidersList from '../providers/Providerstable'
 import StatsChart from '../../modertatorView/mainComponent/BarChart'
+import FacilitiesRequestList from '../../modertatorView/mainComponent/Requests'
 
 
 export default function Statistics() {
@@ -16,7 +17,7 @@ export default function Statistics() {
        
        {/* Top Full Width Chart */}
        <div className="xl:col-span-3">
-         <StatsChart  highlightedMonth='Nov'/>
+         <StatsChart />
        </div>
        
        {/* Users Interaction - larger (takes 2 columns) */}
@@ -27,6 +28,7 @@ export default function Statistics() {
        {/* Requests - smaller (takes 1 column) */}
      
          <UsersInteraction />
+         <FacilitiesRequestList />
        
     </div>
     </div>

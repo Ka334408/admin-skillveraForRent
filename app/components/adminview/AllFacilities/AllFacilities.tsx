@@ -3,11 +3,12 @@ import FacilitiesAreaChart from '../../modertatorView/mainComponent/AreaChart'
 import FacilitiesRequestList from '../../modertatorView/mainComponent/Requests'
 import UsersInteraction from '../../modertatorView/mainComponent/UserInteractions'
 import StatsCards from '../mainComponent/statsCards'
+import FacilitiesCards from './FacilitiesCard'
 
 export default function AllFacilities() {
   return (
     <div>
-        <StatsCards/>
+        <FacilitiesCards/>
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 py-3">
   
   {/* Top Full Width Chart */}

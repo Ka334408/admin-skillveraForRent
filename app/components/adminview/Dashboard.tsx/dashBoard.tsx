@@ -4,7 +4,8 @@
 import { Users, Building2, CreditCard} from "lucide-react";
 import StatsCards from "@/app/components/adminview/mainComponent/statsCards";
 import RequestFeedBack from "../mainComponent/RequestFeedBack";
-import MiddleChart from "./MiddleChart";
+import MiddleChart from "./facilityChart";
+import FacilityChart from "./facilityChart";
 
 export default function DashboardHome() {
     /* ------- Fake Data ------- */
@@ -41,7 +42,7 @@ export default function DashboardHome() {
             </div>
             {/*---------------middle Chart ----------*/ }
             <div>
-                <MiddleChart/>
+                <FacilityChart/>
             </div>
            
 
