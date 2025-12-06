@@ -28,6 +28,20 @@ export default function Sidebar({menuItems,name}:{menuItems :any[],name:any}) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
+  const { user, isHydrated } = useUserStore();
+
+  if (!isHydrated) {
+    return (
+      <div className="p-4">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  const finalUser = {
+    name: user?.name || "User",
+  };
+
 
 
   const bottomItems = [
@@ -76,14 +90,12 @@ export default function Sidebar({menuItems,name}:{menuItems :any[],name:any}) {
           <X className="w-6 h-6" />
         </button>
 
-        {/* 🔹 الجزء العلوي */}
         <div className="flex-1 overflow-y-auto">
-          {/* 🟢 اسم اليوزر */}
           <div className="flex items-center gap-3 mb-6 mt-4">
           <User className="w-7 h-7 text-[#0E766E]" />
           { (
             <h2 className="text-xl font-bold">
-              {name}
+              {finalUser.name}
             </h2>
           )}
         </div>
