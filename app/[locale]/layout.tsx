@@ -3,11 +3,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import Header from "../components/header";
 import AOSProvider from "../components/AOSProvider";
 import ThemeProvider from "../components/ThemeProvider";
 import "../globals.css";
-import Footer from "../components/footer";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
