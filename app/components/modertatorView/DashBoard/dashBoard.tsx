@@ -43,7 +43,7 @@ export default function DashboardHome() {
             </div>
             {/*---------------middle Chart ----------*/ }
             <div>
-               <StatsChart variant="bar" highlightedMonth="Jun" title="All Facilities" />
+               <StatsChart />
             </div>
            
 
