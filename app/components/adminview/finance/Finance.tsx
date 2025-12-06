@@ -12,7 +12,7 @@ export default function Finance() {
   
   {/* Top Full Width Chart */}
   <div className="xl:col-span-3">
-    <StatsChart highlightedMonth='Apr' />
+    <StatsChart/>
   </div>
   
   {/* Users Interaction - larger (takes 2 columns) */}
