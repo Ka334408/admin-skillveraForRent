@@ -2,239 +2,208 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogIn, UserPlus, Shield, XCircle, Loader2 } from "lucide-react"; // Added icons for better context
+import { LogIn, Shield, XCircle, Loader2, Eye, EyeOff, UserPlus, Mail, ArrowLeft, CheckCircle2 } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 
-// Define main color theme
 const THEME_COLOR = "#0E766E";
-const DANGER_COLOR = "#DC2626";
-
-// Placeholder function for Signup logic (currently missing)
-const handleSignup = async (e: React.FormEvent) => {
-  e.preventDefault();
-  // In a real application, you'd collect and validate the form data here:
-  // const fullName = (e.target as any).fullName.value;
-  // const mobile = (e.target as any).mobile.value;
-  // const password = (e.target as any).password.value;
-
-  alert("Signup is a placeholder. Please use the Login form.");
-};
 
 export default function StaffLoginFlip() {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [requestLoading, setRequestLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [requestMessage, setRequestMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  
   const router = useRouter();
+  const { setUser, setToken } = useUserStore();
 
-  const { setUser, setToken } = useUserStore.getState();
-
-  // ----------------------
-  // API TRY FUNCTION
-  // ----------------------
-  const tryLogin = async (
-    email: string,
-    password: string,
-    userType: "ADMIN" | "MODERATOR"
-  ) => {
+  // --- LOGIN LOGIC (FRONT) ---
+  const tryLogin = async (email: string, password: string, userType: "ADMIN" | "MODERATOR") => {
     try {
-      setErrorMessage(null);
-      const res = await axiosInstance.post(
-        `/authentication/${userType}/login`,
-        { email, password }
-      );
+      const res = await axiosInstance.post(`/authentication/${userType}/login`, { email, password });
       return { data: res.data, userType };
     } catch (err: any) {
-      // Return null on failure to allow trying the next role
       return null;
     }
   };
 
-  // ----------------------
-  // LOGIN HANDLER
-  // ----------------------
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage(null);
 
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-
+    const target = e.target as any;
     const email = target.email.value.trim();
     const password = target.password.value.trim();
 
-    // 1. TRY ADMIN
     let result = await tryLogin(email, password, "ADMIN");
-
-    if (!result) {
-      // 2. TRY MODERATOR
-      result = await tryLogin(email, password, "MODERATOR");
-    }
+    if (!result) result = await tryLogin(email, password, "MODERATOR");
 
     if (result?.data?.data) {
-      const user = result.data.data.user;
-      const token = result.data.data.token;
-      const type = result.userType;
-
-      setUser({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone || "",
-        image: user.image || null,
-        gender: user.gender || "",
-        dob: user.dob || "",
-        addressLatLong: user.addressLatLong || "",
-        type: type,
-      });
-
+      const { user, token } = result.data.data;
+      setUser({ ...user, type: result.userType });
       setToken(token);
-
-      // Redirect based on successful role
-      router.push(`/${type.toLowerCase()}/dashBoard`);
-      setLoading(false);
+      router.push(`/${result.userType.toLowerCase()}/dashBoard`);
       return;
     }
 
-    // FAILED BOTH
-    setErrorMessage("Invalid credentials or you are not an authorized staff member.");
+    setErrorMessage("Invalid credentials or unauthorized account.");
     setLoading(false);
+  };
+
+  // --- FIRST LOGIN REQUEST (BACK) ---
+  const handleFirstTimeLoginRequest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setRequestLoading(true);
+    setRequestMessage(null);
+
+    const email = (e.target as any).setupEmail.value.trim();
+
+    try {
+      const response = await axiosInstance.post("/authentication/first-login/request", { email });
+      
+      if (response.status === 200 || response.status === 201) {
+        setRequestMessage({ type: 'success', text: "OTP sent successfully!" });
+        // Navigate to OTP page, passing email in query params for the next step
+        setTimeout(() => {
+          router.push(`/auth/verify-otp?email=${encodeURIComponent(email)}`);
+        }, 1500);
+      }
+    } catch (error: any) {
+      const msg = error.response?.data?.message || "Failed to send request. Please try again.";
+      setRequestMessage({ type: 'error', text: msg });
+    } finally {
+      setRequestLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-lg h-[500px] perspective-1000"> {/* Added perspective for better 3D effect */}
+      <div className="relative w-full max-w-md h-[550px] perspective-1000">
         <div
-          className={`absolute inset-0 transition-transform duration-1000 transform ${
+          className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${
             isFlipped ? "rotate-y-180" : ""
           }`}
-          style={{ transformStyle: "preserve-3d" }}
         >
-          {/* ------------------------------------------------ */}
-          {/* LOGIN CARD (FRONT) */}
-          {/* ------------------------------------------------ */}
-          <div
-            className="absolute inset-0 bg-white rounded-3xl shadow-2xl flex flex-col p-10 backface-hidden"
-            style={{ backfaceVisibility: "hidden" }}
-          >
-            <div className="flex items-center justify-center mb-8 gap-3 text-2xl font-extrabold text-gray-800">
-                <Shield className={`w-7 h-7 text-[${THEME_COLOR}]`} />
-                STAFF LOGIN
+          {/* --- FRONT CARD: LOGIN --- */}
+          <div className="absolute inset-0 backface-hidden bg-white rounded-3xl shadow-2xl p-10 flex flex-col justify-center">
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-14 h-14 bg-[#0E766E15] rounded-2xl flex items-center justify-center mb-4">
+                <Shield className="w-7 h-7" style={{ color: THEME_COLOR }} />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800">Staff Login</h2>
             </div>
 
-            <form onSubmit={handleLogin} className="w-full flex flex-col items-center gap-6">
+            <form onSubmit={handleLogin} className="space-y-4">
               <input
                 type="email"
                 name="email"
                 placeholder="Staff Email"
-                disabled={loading}
-                className="w-full border border-gray-300 text-black p-4 rounded-xl outline-none focus:border-blue-500 transition disabled:bg-gray-100"
+                className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0E766E] transition"
                 required
               />
-
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                disabled={loading}
-                className="w-full border border-gray-300 text-black p-4 rounded-xl outline-none focus:border-blue-500 transition disabled:bg-gray-100"
-                required
-              />
+              
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0E766E] transition"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
 
               {errorMessage && (
-                <div className="w-full bg-red-100 border border-red-300 text-red-700 p-3 rounded-xl flex items-center gap-2 text-sm font-medium">
-                    <XCircle className="w-5 h-5" />
-                    {errorMessage}
+                <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm flex items-center gap-2">
+                  <XCircle size={16} /> {errorMessage}
                 </div>
               )}
-              
-              <div className="flex justify-between w-full text-sm mt-2">
-                <p
-                  onClick={() => setIsFlipped(true)}
-                  className={`text-right text-sm text-gray-600 cursor-pointer hover:text-[${THEME_COLOR}] transition flex items-center gap-1`}
-                >
-                  <UserPlus className="w-4 h-4" />
-                  Request access?
-                </p>
-                <p className="text-gray-600 cursor-pointer hover:text-black transition">
-                    Forgot password?
-                </p>
-              </div>
-
 
               <button
-                type="submit"
                 disabled={loading}
-                className={`bg-[${THEME_COLOR}] text-white w-full py-4 rounded-xl shadow-lg hover:bg-[#07534e] transition font-bold text-lg flex items-center justify-center gap-3 mt-6 disabled:bg-gray-400`}
+                className="w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 mt-4 disabled:opacity-70 transition-all"
+                style={{ backgroundColor: THEME_COLOR }}
               >
-                {loading ? (
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                    <LogIn className="w-5 h-5" />
-                )}
-                {loading ? "AUTHENTICATING..." : "LOGIN TO DASHBOARD"}
+                {loading ? <Loader2 className="animate-spin" /> : <LogIn size={20} />}
+                {loading ? "Authenticating..." : "Login"}
               </button>
             </form>
+
+            <button
+              onClick={() => setIsFlipped(true)}
+              className="mt-6 text-sm text-gray-500 hover:text-teal-700 flex items-center justify-center gap-2 transition"
+            >
+              <UserPlus size={16} /> First time logging in?
+            </button>
           </div>
 
-          {/* ------------------------------------------------ */}
-          {/* SIGNUP CARD (BACK) */}
-          {/* ------------------------------------------------ */}
-          <div
-            className="absolute inset-0 bg-white rounded-3xl shadow-2xl flex flex-col p-10 backface-hidden transform rotate-y-180"
-            style={{ backfaceVisibility: "hidden" }}
-          >
-            <div className="flex items-center justify-center mb-8 gap-3 text-2xl font-extrabold text-gray-800">
-                <UserPlus className={`w-7 h-7 text-blue-600`} />
-                STAFF ACCESS REQUEST
+          {/* --- BACK CARD: FIRST TIME LOGIN --- */}
+          <div className="absolute inset-0 backface-hidden bg-white rounded-3xl shadow-2xl p-10 flex flex-col justify-center rotate-y-180">
+            <div className="flex flex-col items-center mb-6">
+              <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
+                <Mail className="w-7 h-7 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 text-center">Activate Account</h2>
+              <p className="text-gray-500 text-sm text-center mt-2 px-4">
+                Enter your email to receive a one-time password (OTP).
+              </p>
             </div>
 
-            <form onSubmit={handleSignup} className="w-full flex flex-col items-center gap-6">
-              <p className="text-center text-gray-600 mb-4 border-b pb-4">
-                This area is for **Staff Access Requests** only. Please contact IT support to create your account.
-              </p>
-              
-              <input
-                type="text"
-                placeholder="Full name"
-                name="fullName"
-                className="w-full border border-gray-300 text-black p-4 rounded-xl outline-none focus:border-blue-500 transition"
-                required
-              />
-
+            <form onSubmit={handleFirstTimeLoginRequest} className="space-y-4">
               <input
                 type="email"
-                placeholder="Work Email"
-                name="workEmail"
-                className="w-full border border-gray-300 text-black p-4 rounded-xl outline-none focus:border-blue-500 transition"
+                name="setupEmail"
+                placeholder="Enter Work Email"
+                className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
                 required
               />
-              
-              {/* Optional: Add a field for requested role (Admin/Moderator) */}
-              
-              <div className="flex justify-start w-full text-sm mt-2">
-                <p
-                  onClick={() => setIsFlipped(false)}
-                  className="text-gray-600 cursor-pointer hover:text-black transition flex items-center gap-1 font-medium"
-                >
-                  <LogIn className="w-4 h-4" />
-                  Already have an account? **Log In**
-                </p>
-              </div>
 
-              <button
-                type="submit"
-                className="bg-blue-600 text-white w-full py-4 rounded-xl shadow-lg hover:bg-blue-700 transition font-bold text-lg "
+              {requestMessage && (
+                <div className={`p-3 rounded-lg text-sm flex items-center gap-2 ${
+                  requestMessage.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+                }`}>
+                  {requestMessage.type === 'success' ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
+                  {requestMessage.text}
+                </div>
+              )}
+
+              <button 
+                disabled={requestLoading}
+                className="w-full py-4 rounded-xl bg-teal-700 text-white font-bold text-lg hover:bg-teal-800 transition flex items-center justify-center gap-2 disabled:opacity-70"
               >
-                REQUEST ACCESS
+                {requestLoading ? <Loader2 className="animate-spin" /> : null}
+                {requestLoading ? "Sending OTP..." : "Get OTP"}
               </button>
             </form>
+
+            <button
+              onClick={() => {
+                setIsFlipped(false);
+                setRequestMessage(null);
+              }}
+              className="mt-8 text-sm text-gray-400 hover:text-gray-800 flex items-center justify-center gap-2 transition"
+            >
+              <ArrowLeft size={16} /> Back to Login
+            </button>
           </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .perspective-1000 { perspective: 1000px; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+      `}</style>
     </div>
   );
 }
