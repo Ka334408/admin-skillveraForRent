@@ -2,9 +2,22 @@
 
 import axios from "axios";
 
+const WEB_API_URL =  "/api";
+const MOBILE_API_URL =  "/api";
+
+// Default axios instance for web
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "/api",
-  withCredentials: true, 
+  baseURL: WEB_API_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Separate instance for mobile if needed
+export const apiMobile = axios.create({
+  baseURL: MOBILE_API_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
