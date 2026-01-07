@@ -1,377 +1,301 @@
 {
-  "Content": {
-    "hi": "مرحبا",
-    "title": "اهلا",
-    "work": "مهندس برمجه"
-  },
-  "Navigation": {
-    "homeBtn": "الرئيسية",
-    "nameBtn": "الأسم",
-    "workBtn": "تسجيل"
+  "Auth": {
+    "staffLogin": "تسجيل دخول الموظفين",
+    "emailPlaceholder": "البريد الإلكتروني للموظف",
+    "passwordPlaceholder": "كلمة المرور",
+    "loginButton": "تسجيل الدخول",
+    "authenticating": "جاري التحقق...",
+    "firstTimeQuestion": "هل تسجل دخولك للمرة الأولى؟",
+    "activateAccount": "تنشيط الحساب",
+    "activateDescription": "أدخل بريدك الإلكتروني لتلقي رمز التحقق (OTP).",
+    "workEmailPlaceholder": "أدخل البريد الإلكتروني للعمل",
+    "sendingOtp": "جاري إرسال الرمز...",
+    "getOtp": "الحصول على الرمز",
+    "backToLogin": "العودة لتسجيل الدخول",
+    "loginSuccess": "تم تسجيل الدخول بنجاح!",
+    "invalidCredentials": "بيانات الاعتماد غير صالحة أو الحساب غير مصرح به.",
+    "otpSent": "تم إرسال رمز التحقق بنجاح!",
+    "requestFailed": "فشل إرسال الطلب. يرجى المحاولة مرة أخرى."
   },
   "LocaleSwitcher": {
-    "label": "تغير اللغة",
-    "locale": "{locale, select, ar {العربية} en {English} other {Unknown}}"
+    "select_language": "اختر اللغة",
+    "locale": "{locale, select, en {الإنجليزية} ar {العربية} other {{locale}}}"
   },
-  "loginWords": {
-    "welcome": "مرحباً بعودتك !",
-    "tagline": "استمتع بتجربة إيجار مختلفة مع منصة Skillvera",
-    "email": "البريد الإلكتروني",
-    "password": "كلمة المرور",
-    "forgot": "نسيت كلمة المرور؟",
-    "login": "تسجيل الدخول",
-    "no_account": "ليس لديك حساب ؟",
-    "signup": "سجّل الآن",
-    "loading": "جاري تسجيل الدخول"
-  },
-  "resetPassWords": {
-    "reset": "إسترجاع كلمة المرور",
-    "associated": "إدخل البريد الإلكتروني المتعلق بهذا الحساب",
-    "email": "البريد الإلكتروني",
-    "send": "إرسال البيانات",
-    "goBack": "العودة الي تسجيل الدخول"
-  },
-  "signup": {
-    "title": "Skillvera",
-    "subtitle": "ابدأ رحلتك المثالية مع الإيجار",
-    "full_name": "الاسم بالكامل",
-    "email": "البريد الإلكتروني",
-    "password": "كلمة المرور",
-    "signup": "تسجيل",
-    "signing_up": "جاري التسجيل...",
-    "have_account": "هل لديك حساب بالفعل؟",
-    "login": "تسجيل الدخول",
-    "error": "حدث خطأ ما",
-    "phone":"رقم الهاتف"
-    
-  },
-  "verify": {
-    "title": "ادخل رمز التحقق",
-    "subtitle": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
-    "resend": "إعادة الإرسال بعد {seconds} ثانية",
-    "back": "رجوع",
-    "resendBtn": "إرسال كود أخر",
-    "verifyBtn":"التأكد من الرمز"
-  },
-  "resetPasswordWords": {
-    "title": "إعادة تعيين كلمة المرور",
-    "subtitle": "أدخل كلمة المرور الجديدة بالأسفل.",
-    "new_password": "كلمة المرور الجديدة",
-    "confirm_password": "إعادة إدخال كلمة المرور",
-    "button": "إعادة التعيين",
+  "Sidebar": {
     "loading": "جاري التحميل...",
-    "not_match": "كلمات المرور غير متطابقة",
-    "error": "حدث خطأ ما",
-    "success":"تم تغيير كلمة المرور بنجاح"
+    "guest": "مستخدم",
+    "support": "الدعم الفني",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "switch_to": "التبديل إلى",
+    "web_site_mode": "نسخة الويب",
+    "mobile_app_mode": "تطبيق الموبايل",
+    "menu": {
+      "dashboard": "لوحة التحكم",
+      "facilities": "كافة المرافق",
+      "providers": "المستخدمين",
+      "calendar": "التقويم",
+      "finance": "المالية",
+      "statistic": "الإحصائيات",
+      "myProfile": "ملفي الشخصي"
+    }
   },
-  "navbar": {
-    "logo": "اللوجو هنا",
-    "home": "الرئيسية",
-    "facilities": "كل المرافق",
-    "about": "معلومات عنا",
-    "contact": "اتصل بنا",
-    "become_host": "كن مضيفًا",
-    "signup": "إنشاء حساب",
-    "account": "الحساب",
-    "support": "الدعم والمساعدة",
-    "login": "تسجيل الدخول أو إنشاء حساب",
-    "logout": "تسجيل الخروج"
+  "Topbar": {
+    "greeting": "مرحباً، {name}!",
+    "guest": "مستخدم",
+    "roleStatus": "لوحة تحكم {role}",
+    "searchPlaceholder": "ابحث عن أي شيء هنا...",
+    "roles": {
+      "admin": "المدير",
+      "moderator": "المشرف",
+      "guest": "زائر"
+    }
   },
-  "Hero": {
-    "slogan": "هنا يكتب الشعار مع جملة أو جملتين جذابتين",
-    "explore": "استكشف الآن"
+  
+  "statsCard": {
+    "currency": "ر.س",
+    "liveUpdate": "إحصائيات مباشرة",
+    "cards": {
+      "totalUsers": "إجمالي المستخدمين",
+      "totalProviders": "إجمالي المزودين",
+      "totalRevenue": "إجمالي الإيرادات",
+      "newRegistrations": "تسجيلات جديدة"
+    },
+    "errors": {
+      "forbidden": "ليس لديك صلاحية لعرض هذا القسم.",
+      "failed": "فشل في تحديث البيانات."
+    }
   },
-  "Search": {
-    "place": "المكان",
-    "placePlaceholder": "ابحث بالموقع",
+  "FacilityChart": {
+      "title": "نمو المنشآت",
+      "subtitle": "تحليل التسجيلات خلال الفترة الماضية",
+      "viewAll": "عرض جميع المنشآت",
+      "footerNote": "نظرة عامة على الإحصائيات الشهرية",
+      "trendPositive": "اتجاه إيجابي",
+      "trendStable": "أداء مستقر",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل البيانات"
+    },
+    "Lists": {
+      "requestsTitle": "طلبات الاعتماد",
+      "requestsSubtitle": "مراجعة المرافق المعلقة",
+      "viewAllRequests": "مراجعة جميع الطلبات",
+      "statusPending": "قيد الانتظار",
+      "statusApproved": "معتمد",
+      "feedbackTitle": "آخر الآراء",
+      "feedbackSubtitle": "أحدث تقييمات العملاء",
+      "viewAllFeedback": "عرض جميع التقييمات",
+      "noComment": "لا يوجد تعليق",
+      "noRequests": "لا توجد طلبات معلقة",
+      "noFeedback": "لا توجد تقييمات بعد",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحديث البيانات"
+    },
+    "FacilitiesCards": {
+      "pending": "منشآت معلقة",
+      "approved": "منشآت معتمدة",
+      "total": "إجمالي المنشآت",
+      "liveUpdate": "تحديث مباشر",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل البيانات"
+    },
+    "Home": {
+      "welcomeTitle": "نظرة عامة على النظام",
+      "welcomeSubtitle": "البيانات والتحليلات المباشرة"
+    },
+    "FacilityAreaChart": {
+      "title": "اتجاه التسجيل",
+      "subtitle": "تحليل نمو المنشآت الجديد",
+      "allTime": "كل الأوقات",
+      "viewAll": "عرض جميع المنشآت",
+      "growthTrend": "اتجاه نمو مستمر",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل البيانات",
+      "last3Months": "آخر 3 شهور",
+      "last6Months": "آخر 6 شهور",
+      "lastYear": "آخر 12 شهر"
+    },
+    "ReservationsChart": {
+      "title": "الحجوزات الشهرية",
+      "subtitle": "أداء المرافق عبر الشهور",
+      "noData": "لا توجد بيانات حجوزات متاحة",
+      "updateNotice": "يتم التحديث بناءً على عمليات تسجيل الدخول",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل مزامنة الحجوزات"
+    },
+    "Requests": {
+      "title": "طلبات جديدة",
+      "subtitle": "منشآت بانتظار المراجعة",
+      "pendingBadge": "قيد الانتظار",
+      "noRequests": "لا توجد طلبات جديدة حالياً",
+      "viewDetails": "عرض التفاصيل",
+      "viewAll": "إدارة كافة الطلبات",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل الطلبات"
+    },
+    "AllFacilities": {
+      "mainTitle": "إدارة المرافق",
+      "subTitle": "التحليلات التفصيلية ومتابعة الطلبات"
+    },
+    "RecentRequests": {
+      "title": "طلبات المزودين الأخيرة",
+      "subtitle": "طلبات إضاقة مرافق جديدة للمراجعة",
+      "filter": "تصفية",
+      "noRequests": "لا توجد طلبات مزودين قيد الانتظار",
+      "review": "مراجعة الطلب",
+      "viewAll": "عرض كافة المزودين",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل البيانات"
+    },
+    "ProvidersPage": {
+      "mainTitle": "دليل المستخدمين",
+      "subTitle": "مراقبة وإدارة المستخدمين "
+    },
+    "ReservationsFinanceChart": {
+      "title": "إحصائيات الحجوزات",
+      "subtitle": "تحليل الحجوزات الشهرية للمنشآت",
+      "last3Months": "آخر 3 شهور",
+      "last6Months": "آخر 6 شهور",
+      "lastYear": "آخر 12 شهر",
+      "viewAll": "عرض كافة الحجوزات",
+      "forbidden": "غير مسموح بالعرض",
+      "error": "فشل تحميل البيانات",
+      "noData": "لا توجد بيانات متاحة حالياً"
+    },
+    "Calendar": {
+      "title": "الخط الزمني للمنشآت",
+      "subtitle": "تاريخ إنشاء المنشآت المسجلة بالنظام",
+      "recentAdded": "أضيف مؤخراً",
+      "noEvents": "لم يتم تسجيل أي منشأة في هذا الشهر"
+    },
+    "UsersTable": {
+      "title": "إدارة الحسابات",
+      "subtitle": "تحكم في مستخدمي النظام والمشرفين",
+      "totalLabel": "إجمالي {type}",
+      "addModerator": "إضافة مشرف جديد",
+      "loading": "جاري جلب البيانات...",
+      "noDataTitle": "لا توجد بيانات متاحة حالياً",
+      "noDataSubtitle": "حاول تغيير الفلتر أو إضافة مستخدم جديد",
+      "paginationInfo": "الصفحة {current} من {total}",
+      "tabs": {
+        "provider": "المزودين",
+        "user": "المستخدمين",
+        "moderator": "المشرفين"
+      },
+      "columns": {
+        "id": "المعرف",
+        "user": "المستخدم",
+        "contact": "بيانات التواصل",
+        "status": "الحالة",
+        "phone": "الجوال",
+        "joinedDate": "تاريخ الانضمام"
+      }
+    },
+    "AddModerator": {
+      "title": "إضافة مشرف جديد",
+      "subtitle": "إنشاء حساب صلاحيات إشرافية",
+      "success": "تم إنشاء حساب المشرف بنجاح!",
+      "errorDefault": "حدث خطأ غير متوقع.",
+      "validation": {
+        "phone": "يرجى إدخال رقم هاتف صحيح مع رمز الدولة."
+      },
+      "fields": {
+        "name": "الاسم بالكامل",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الجوال"
+      },
+      "placeholders": {
+        "name": "مثال: أحمد محمد",
+        "email": "example@mail.com"
+      },
+      "buttons": {
+        "cancel": "إلغاء",
+        "submit": "إنشاء الحساب"
+      }
+    },
+    "Facilities": {
+    "title": "إدارة الموافقة على المرافق",
+    "subtitle": "مراجعة وتدقيق بيانات المرافق والمزودين",
+    "addCategory": "إضافة تصنيف جديد",
+    "loading": "جاري تحميل البيانات...",
+    "noData": "لا توجد مرافق معلقة حالياً",
+    "tabs": {
+      "pending": "طلبات معلقة",
+      "approved": "مرافق معتمدة"
+    },
+    "columns": {
+      "facility": "المرفق",
+      "provider": "المزود",
+      "status": "الحالة",
+      "date": "التاريخ",
+      "actions": "العمليات"
+    },
+    "actions": {
+      "approve": "موافقة",
+      "reject": "رفض"
+    },
+    "modal": {
+      "title": "إنشاء تصنيف جديد",
+      "labelEn": "اسم التصنيف (بالإنجليزية)",
+      "labelAr": "اسم التصنيف (بالعربية)",
+      "cancel": "إلغاء",
+      "submit": "حفظ البيانات"
+    },
+    "pagination": {
+      "page": "الصفحة",
+      "of": "من"
+    },
+    "errors": {
+      "fetchFailed": "فشل جلب البيانات، يرجى المحاولة لاحقاً",
+      "actionFailed": "لم تكتمل العملية، تحقق من الصلاحيات",
+      "categoryFailed": "فشل إنشاء التصنيف"
+    },
+    "success": {
+      "approved": "تم قبول المرفق بنجاح",
+      "rejected": "تم رفض المرفق",
+      "categoryCreated": "تم إضافة التصنيف الجديد بنجاح"
+    }
+  },
+  
+  "FacilityDetails": {
+    "back": "العودة",
+    "status": "الحالة",
+    "locationPending": "الموقع قيد التحديد",
+    "arabicContent": "المحتوى العربي",
+    "englishContent": "المحتوى الإنجليزي",
+    "gallery": "معرض الصور",
+    "reviews": "تقييمات الأعضاء",
+    "pricing": "هيكل التسعير",
+    "perDay": "جنيه / يومياً",
     "category": "التصنيف",
-    "categoryPlaceholder": "اختر التصنيف",
-    "hotel": "فندق",
-    "apartment": "شقة",
-    "villa": "فيلا",
-    "from": "من",
-    "to": "إلى",
-    "results": "نتائج البحث:",
-    "start": "أدخل تاريخ البدء",
-    "end": "أدخل تاريخ الإنتهاء"
-  },
-  "categories": {
-    "title": "الفئات المتاحة",
-    "all": "بعض الفئات ",
-    "rooms": "الغرف",
-    "sports": "الملاعب",
-    "labs": "المعامل",
-    "login_required": "يجب تسجيل الدخول أولاً",
-    "ok": "حسناً",
-    "see_all": "عرض الكل"
-  },
-  "card":{
-    "more":"معرفة المزيد"
-  },
-  "map": {
-    "title": " إستكشف أقرب وحدة إليك !",
-    "subtitle": "إضغط علي الوحدة للمزيد من الإستكشاف."
-  },
-  "trusted": {
-    "trustedBy": "مدعومة من",
-    "enterprices": "الشركات",
-    "inSaudi": "في المملكة العربية السعودية"
-  },
-  "features": {
-    "subtitle": "نحن نقدم أفضل الحلول",
-    "title": "تطبيق واحد بخيارات متعددة يمنحك حرية التسجيل والاستمتاع بنشاطك",
-    "planningTitle": "التخطيط",
-    "planningDesc": "ضع خريطة لمشاريع الكريبتو باستخدام قوالب Framer",
-    "prototypeTitle": "النموذج الأولي",
-    "prototypeDesc": "ابنِ موقع تجريبي لمنتجك",
-    "refinementTitle": "التحسين",
-    "refinementDesc": "قم بتحسين وتطوير صفحة الهبوط الخاصة بك",
-    "scaleTitle": "التوسع والدعم",
-    "scaleDesc": "انشر المنتج مباشرة مع ضمان الدعم الفني"
-  },
-  "download": {
-    "title": "استكشف تطبيقنا وانضم إلى أقرب نشاط لك الآن على",
-    "appName": "اسم التطبيق",
-    "downloadApp": "قم بتنزيل التطبيق",
-    "googlePlay": "تنزيل من متجر بلاي",
-    "appStore": "تنزيل من متجر آبل",
-    "scanNow": "امسح الكود لتحميل التطبيق الآن"
-  },
-  "profile": {
-    "title": "ملفي الشخصي",
-    "about": "معلوماتي",
-    "reservations": "الحجوزات السابقة",
-    "reviews": "تقييماتي",
-    "favorites": "مفضلتي"
-  },
-  "proPhoto":{
-  "aboutTitle": "نبذة عني",
-  "choose": "اختر صورة",
-  "uploading": "جاري الرفع...",
-  "save": "حفظ",
-  "completeTitle": "أكمل ملفك الشخصي",
-  "completeDesc": "أضف صورة شخصية وبعض المعلومات لإكمال ملفك الشخصي.",
-  "namePlaceholder": "اسمك",
-  "getStarted": "ابدأ الآن"
-},
-
-  "favorites": {
-    "title": "المفضلة",
-    "loading": "جارٍ التحميل...",
-    "emptyMessage": "لم تقم بإضافة أي عناصر إلى المفضلة بعد.",
-    "exploreButton": "استكشف الآن",
-    "product": "المنتج",
-    "category": "الفئة",
-    "addedOn": "تاريخ الإضافة"
-  },
-   "reservations": {
-    "title": "الحجوزات السابقة",
-    "loading": "جارٍ التحميل...",
-    "emptyMessage": "ستظهر حجوزاتك السابقة هنا بعد أول عملية حجز.",
-    "rentNow": "احجز الآن",
-    "name": "الاسم",
-    "date": "تاريخ الحجز"
-  },
-  "reviews": {
-    "title": "مراجعاتي",
-    "loading": "جارٍ التحميل...",
-    "emptyMessage": "لم تقم بكتابة أي مراجعات بعد.",
-    "rentNow": "احجز الآن",
-    "review": "المراجعة",
-    "date": "التاريخ"
+    "agePolicy": "سياسة العمر",
+    "years": "سنوات",
+    "systemRecords": "سجلات النظام",
+    "registered": "تاريخ التسجيل",
+    "activeStatus": "حالة النشاط",
+    "online": "متصل",
+    "offline": "غير متصل",
+    "summary": "هذا المرفق يخضع لمعايير الجودة المعتمدة في النظام. يمكنك مراجعة كافة البيانات من خلال لوحة التحكم.",
+    "notFound": "المرفق غير موجود",
+    "fetching": "جاري تحميل البيانات..."
   },
   
- 
-  "footer": {
-    "main": "الصفحة الرئيسية",
-    "mainLinks": [
-      { "label": "كل المنتجات", "href": "/products" },
-      { "label": "عن سكيلفرا رنت", "href": "/userview/aboutUS" },
-      { "label": "خريطة المنتجات", "href": "/userview/allFacilities" },
-      { "label": "أنا مالك منتج!", "href": "/owner" }
-    ],
-
-    "about": "عن سكيلفرا رنت",
-    "aboutLinks": [
-      { "label": "عن سكيلفرا رنت", "href": "/userview/aboutUS" },
-      { "label": "الفريق", "href": "/team" },
-      { "label": "الوظائف", "href": "/careers" },
-      { "label": "المدونة", "href": "/blog" }
-    ],
-
-    "support": "الدعم والمساعدة",
-    "supportLinks": [
-      { "label": "تواصل معنا", "href": "/userview/contactUS" },
-      { "label": "الأسئلة الشائعة", "href": "/userview/FAQpage" },
-      { "label": "الشروط والأحكام", "href": "/terms" },
-      { "label": "الدعم والمساعدة", "href": "/support" }
-    ],
-
-    "apps": "تطبيقاتنا",
-    "appsLinks": [
-      { "label": "آب ستور", "href": "https://apps.apple.com" },
-      { "label": "جوجل بلاي", "href": "https://play.google.com" }
-    ],
-
-    "brand": "سكيلفرا رنت"
-  },
-
-
-  
-  "filters": {
-    "category": "التصنيف",
-    "location": "المكان",
-    "maxPrice": "أقصى سعر",
-    "sports": "رياضة",
-    "education": "تعليم",
-    "health": "فنادق",
-    "riyadh": "الرياض",
-    "jeddah": "جدة"
-  },
-  "pagination": {
-    "prev": "السابق",
-    "next": "التالي"
-  },
-  "facility": {
-    "priceUnit": "{price} ر.س"
-  },
-  
-  "contact": {
-    "title": "تواصل معنا",
-    "subtitle": "كن على تواصل مع فريقنا",
-    "teamTitle": "تواصل مع فريقنا",
-    "teamDesc": "تواصل معنا عبر واتساب أو البريد الإلكتروني لمزيد من المعلومات والدعم، نحن هنا من أجلك.",
-    "fullName": "الاسم الكامل",
-    "email": "البريد الإلكتروني",
-    "message": "رسالتك",
-    "agree": "أوافق على شروط الخدمة وسياسة الخصوصية",
-    "contactUs": "أرسل",
-    "directChat": "دردشة مباشرة"
-  },
-
-  "about": {
-    "title": "معلومات عنا",
-    "subtitle": "اعرف المزيد عن سكيلفيرا"
-  },
-  "benefits": {
-    "responsable": "فريق مسؤول",
-    "benefit1": "ميزة",
-    "benefit2": "ميزة 2",
-    "benefit3": "ميزة 3",
-    "text": "هذا نص تجريبي..."
-  },
-  "story": {
-    "title": "قصتنا",
-    "text": "لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد..."
-  },
-  "testimonials": {
-    "subtitle": "مشاهدون سعداء",
-    "title": "لماذا تختارنا"
-  },
-  "rating":{
-  "title": "تقييم النزلاء",
-  "description": "هذا المرفق مُقيّم بناءً على تقييمات وآراء النزلاء."
-},
-
-  "review": {
-    "showMore": "عرض المزيد",
-    "stayed": "أقام {nights} ليالي"
-  },
-  
-  "thingsToKnow": {
-    "title": "أشياء يجب معرفتها",
-    "rulesTitle": "قواعد المنشأة",
-    "policiesTitle": "سياسات المنشأة",
-    "rules": [
-      "المغادرة قبل الساعة 12 ظهرًا",
-      "ممنوع التدخين داخل المكان",
-      "ممنوع اصطحاب الحيوانات الأليفة"
-    ],
-    "policies": "كانت الغرفة نظيفة جدًا وتطابق الصورة تمامًا. فندق هادئ وصغير خاصة خلال النهار. في المساء يمكنك سماع بعض الموسيقى من الأماكن القريبة.",
-    "showMore": "عرض المزيد"
-  },
-  
-  "facilityMap": {
-    "title": "هذا المرفق في : {location}",
-    "info": "معلومات و مميزات المرفق",
-    "noFeatures": "لا توجد مميزات مضافة بعد.",
-    "popup": "موقع المرفق ({lat}, {lng})"
-  },
-  
-  "facilityHeader": {
-    "ratingCount": "({count})",
-    "priceUnit": "{price}/اليوم",
-    "overview": "نظرة عامة",
-    "share": "مشاركة",
-    "save": "حفظ"
-  },
-  
-   "FacilityCalendar": {
-    "selectCheckIn": "اختر تاريخ الوصول",
-    "clearDates": "مسح التواريخ",
-    "forDays": "لمدة {count} أيام",
-    "checkIn": "تاريخ الدخول",
-    "checkOut": "تاريخ الخروج",
-    "pleaseSelect": "من فضلك اختر التواريخ للحجز",
-    "rentNow": "احجز الآن"
-  },
-  
-  "FAQ": {
-    "title": "الأسئلة الشائعة",
-    "subtitle": "أسئلة يكثر طرحها",
-    "description": "هل وجدت السؤال الذي تبحث عنه؟",
-    "readMore": "اقرأ المزيد",
-    "cta": "اطلب عرض سعر",
-    "items": [
-      {
-        "question": "ما هي الخدمات التي تقدمونها؟",
-        "answer": "نقدم مجموعة متنوعة من الخدمات مثل تطوير المواقع، تطبيقات الهاتف، والتصميم."
-      },
-      {
-        "question": "كم يستغرق تنفيذ المشروع؟",
-        "answer": "مدة المشروع تعتمد على نطاقه، غالبًا من أسبوعين إلى 6 أسابيع."
-      },
-       {
-        "question": "هل تقدمون دعم بعد التسليم؟",
-        "answer": "نعم، نوفر إصلاحات للأخطاء مجانًا لمدة شهر مع إمكانية الدعم طويل المدى."
-      },
-      {
-        "question": "ما هي طرق الدفع المتاحة؟",
-        "answer": "نقبل التحويل البنكي، باي بال، وبطاقات الائتمان."
-      },
-      {
-        "question": "هل يمكنكم العمل مع عملاء دوليين؟",
-        "answer": "نعم، نتعاون مع عملاء من جميع أنحاء العالم عبر أدوات التواصل عن بُعد."
-     }
-
-    ]
-  },
-  
-  
-  "userprofile": {
-    "title": "الملف الشخصي",
-    "desc": "المضيفون والضيوف يمكنهم رؤية ملفك الشخصي وقد يظهر عبر Skava للمساعدة في بناء الثقة في مجتمعنا",
-    "phone": "رقم الهاتف",
-    "dob": "تاريخ الميلاد",
-    "location": "الموقع الحالي",
-    "gender": "النوع",
-    "genderMale": "ذكر",
-    "genderFemale": "أنثى",
-    "genderOther": "آخر",
-    "save": "ابدأ الآن",
-    "fetchingLocation": "جاري جلب الموقع الحالي...",
-    "unableLocation": "تعذر الحصول على الموقع",
-    "fullName":"الاسم الكامل"
+  "VerifyOtp": {
+    "verifyTitle": "تحقق من الكود",
+    "verifyDesc": "أدخل الكود المرسل إلى",
+    "otpPlaceholder": "رمز التحقق",
+    "invalidOtp": "رمز التحقق غير صحيح، حاول مرة أخرى.",
+    "verifyButton": "تحقق من الرمز",
+    "setPasswordTitle": "تعيين كلمة المرور",
+    "setPasswordDesc": "أوشكت على الانتهاء! قم بإنشاء كلمة مرور جديدة لحسابك.",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordsMismatch": "كلمات المرور غير متطابقة.",
+    "finishButton": "إنهاء التفعيل",
+    "activating": "جاري التفعيل...",
+    "success": "تم تفعيل الحساب بنجاح!",
+    "failed": "فشل تعيين كلمة المرور، ربما انتهت صلاحية الرابط."
   }
-
-
-
-
-
-
-
-
-
 
 
 

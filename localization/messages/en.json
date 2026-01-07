@@ -1,379 +1,300 @@
 {
-  "Content": {
-    "hi": "Welcome",
-    "title": "Hi, I am Dogan MERDEN",
-    "work": "Working as a frontend developer at an international company"
-  },
-  "Navigation": {
-    "homeBtn": "Home",
-    "nameBtn": "Name",
-    "workBtn": "login"
+  "Auth": {
+    "staffLogin": "Staff Login",
+    "emailPlaceholder": "Staff Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login",
+    "authenticating": "Authenticating...",
+    "firstTimeQuestion": "First time logging in?",
+    "activateAccount": "Activate Account",
+    "activateDescription": "Enter your email to receive a one-time password (OTP).",
+    "workEmailPlaceholder": "Enter Work Email",
+    "sendingOtp": "Sending OTP...",
+    "getOtp": "Get OTP",
+    "backToLogin": "Back to Login",
+    "loginSuccess": "Login successful!",
+    "invalidCredentials": "Invalid credentials or unauthorized account.",
+    "otpSent": "OTP sent successfully!",
+    "requestFailed": "Failed to send request. Please try again."
   },
   "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, ar {العربيه} en {English} other {Unknown}}"
+    "select_language": "Choose Language",
+    "locale": "{locale, select, en {English} ar {Arabic} other {{locale}}}"
   },
-  "loginWords": {
-    "welcome": "Welcome back !",
-    "tagline": "Enjoy a different rental experience with the Skillvera platform",
-    "email": "Email",
-    "password": "Password",
-    "forgot": "Forgot password?",
-    "login": "Log in",
-    "no_account": "Don’t have an account?",
-    "signup": "Sign Up",
-    "loading": "loading"
-  },
-  "resetPassWords": {
-    "reset": " Reset Password ",
-    "associated": "Enter the mail address associated with your account",
-    "email": "Email",
-    "send": "Send Email",
-    "goBack": "Go Back to Login"
-  },
-  "signup": {
-    "title": "Skillvera",
-    "subtitle": "Start your perfect Rent Journey",
-    "full_name": "Full Name",
-    "email": "Email",
-    "password": "Password",
-    "signup": "Sign Up",
-    "signing_up": "Signing Up...",
-    "have_account": "Already have an account?",
-    "login": "Log in",
-    "error": "Something went wrong",
-    "phone":"your phone"
-  },
-  "verify": {
-    "title": "Enter verification code",
-    "subtitle": "The verification code has been sent to your email",
-    "resend": "Resend after {seconds} seconds",
-    "back": "Back",
-    "resendBtn": "Resend Code",
-    "verifyBtn":"verify code"
-  },
-  "resetPasswordWords": {
-    "title": "Reset Password",
-    "subtitle": "Enter your new password below.",
-    "new_password": "New password",
-    "confirm_password": "Re-enter new password",
-    "button": "Reset Password",
+  "Sidebar": {
     "loading": "Loading...",
-    "not_match": "Passwords do not match",
-    "error": "Something went wrong",
-    "success":"password changed successfully"
-  },
-  "navbar": {
-    "logo": "Logo here",
-    "home": "Home",
-    "facilities": "All facilities",
-    "about": "About Us",
-    "contact": "Contact Us",
-    "become_host": "Become a host",
-    "signup": "Sign Up",
-    "account": "Account",
-    "support": "Support & Help",
-    "login": "Login or signup",
-    "logout": "Logout"
-  },
-  "Hero": {
-    "slogan": "Slogan should be here with one or two good sentences",
-    "explore": "Explore now"
-  },
-  "Search": {
-    "place": "Place",
-    "placePlaceholder": "Search by location",
-    "category": "Category",
-    "categoryPlaceholder": "Filter by category",
-    "hotel": "Hotel",
-    "apartment": "Apartment",
-    "villa": "Villa",
-    "from": "From",
-    "to": "To",
-    "results": "Search Results:",
-    "start":"Add Start Date",
-    "end":"Add End Date"
-  },
-  "categories": {
-    "title": "Our Facilities",
-    "all": "Some Facilities",
-    "rooms": "Rooms",
-    "sports": "Sports fields",
-    "labs": "Labs",
-    "login_required": "You must log in first",
-    "ok": "OK",
-    "see_all": "See all"
-  },
-   "card":{
-    "more":"More Details"
-  },
-  "map":{
-    "title":"Explore The Nearest Facility To You!",
-    "subtitle":"Click on any Facility to see more details."
-  },
-  "trusted": {
-    "trustedBy": "Trusted by top",
-    "enterprices": "Enterprices",
-    "inSaudi": "in Saudi Arabia"
-  },
-  "features": {
-    "subtitle": "We deliver best solution",
-    "title": "One application with multiple options to give you freedom of enroll & enjoy your activity",
-    "planningTitle": "Planning",
-    "planningDesc": "Map the crypto projects scope with framer template",
-    "prototypeTitle": "Prototype",
-    "prototypeDesc": "Build crypto website test for your product",
-    "refinementTitle": "Refinement",
-    "refinementDesc": "Refine & improve your crypto landing page",
-    "scaleTitle": "Scale and support",
-    "scaleDesc": "Deploy product live and ensure expert support"
-  },
-  "download": {
-    "title": "Explore our mobile app and join your nearest activity now on",
-    "appName": "App Name",
-    "downloadApp": "Download app",
-    "googlePlay": "Download on the Play Store",
-    "appStore": "Download on the App Store",
-    "scanNow": "Scan to get the app now"
-  },
-  "profile": {
-    "title": "My profile",
-    "about": "About me",
-    "reservations": "Past reservation",
-    "reviews": "My reviews",
-    "favorites": "My favorites"
-  },
-  "proPhoto":{
-  "aboutTitle": "About me",
-  "choose": "Choose image",
-  "uploading": "Uploading...",
-  "save": "Save",
-  "completeTitle": "Complete your profile",
-  "completeDesc": "Add a profile picture and some info to complete your profile.",
-  "namePlaceholder": "Your name",
-  "getStarted": "Get Started"
-},
-
-  "favorites": {
-    "title": "My favorites",
-    "loading": "Loading...",
-    "emptyMessage": "You have not added any favorites yet.",
-    "exploreButton": "Explore Now",
-    "product": "Product",
-    "category": "Category",
-    "addedOn": "Added On"
-  },
-   "reservations": {
-    "title": "Past reservations",
-    "loading": "Loading...",
-    "emptyMessage": "You'll find your past reservations here after your first rent.",
-    "rentNow": "Rent Now",
-    "name": "Name",
-    "date": "Reservation Date"
-  },
-  "reviews": {
-    "title": "My reviews",
-    "loading": "Loading...",
-    "emptyMessage": "You have not written any reviews yet.",
-    "rentNow": "Rent Now",
-    "review": "Review",
-    "date": "Date"
-  },
-
-  
- 
- 
-  "footer": {
-    "main": "Main Page",
-    "mainLinks": [
-      { "label": "All Products", "href": "/products" },
-      { "label": "About Skillvera Rent", "href": "/userview/aboutUS" },
-      { "label": "Products Map", "href": "/map" },
-      { "label": "I'm an Owner!", "href": "/owner" }
-    ],
-
-    "about": "About Skillvera Rent",
-    "aboutLinks": [
-      { "label": "About Skillvera Rent", "href": "/userview/aboutUS" },
-      { "label": "Team", "href": "/team" },
-      { "label": "Careers", "href": "/careers" },
-      { "label": "Blog", "href": "/blog" }
-    ],
-
+    "defaultUser": "User",
     "support": "Support",
-    "supportLinks": [
-      { "label": "Contact Us", "href": "/userview/contactUs" },
-      { "label": "FAQ", "href": "/userview/FAQpage" },
-      { "label": "Terms & Conditions", "href": "/terms" },
-      { "label": "Help & Support", "href": "/support" }
-    ],
-
-    "apps": "Our Apps",
-    "appsLinks": [
-      { "label": "App Store", "href": "https://apps.apple.com" },
-      { "label": "Google Play", "href": "https://play.google.com" }
-    ],
-
-    "brand": "Skillvera Rent"
+    "settings": "Settings",
+    "logout": "Logout",
+    "switch_to": "Switch to",
+    "web_site_mode": "Web Site",
+    "mobile_app_mode": "Mobile App",
+    "menu": {
+      "dashboard": "Dashboard",
+      "facilities": "All Facilities",
+      "providers": "Users",
+      "calendar": "Calendar",
+      "finance": "Finance",
+      "statistic": "Statistics",
+      "myProfile": "My Profile"
+    }
   },
-
-  
-  "filters": {
-    "category": "All Category",
-    "location": "Location",
-    "maxPrice": "Max Price",
-    "sports": "Sports",
-    "education": "Education",
-    "health": "Hotals",
-    "riyadh": "Riyadh",
-    "jeddah": "Jeddah"
-  },
-  "pagination": {
-    "prev": "Prev",
-    "next": "Next"
-  },
-  "facility": {
-    "priceUnit": "{price} R"
+  "Topbar": {
+    "greeting": "Hello, {name}!",
+    "guest": "User",
+    "roleStatus": "{role} Dashboard",
+    "searchPlaceholder": "Search for anything...",
+    "roles": {
+      "admin": "Admin",
+      "moderator": "Moderator",
+      "guest": "Guest"
+    }
   },
   
-  "contact": {
-    "title": "Contact us",
-    "subtitle": "Be In Touch With Our Team",
-    "teamTitle": "Contact Our Team",
-    "teamDesc": "Contact us via WhatsApp or email for more information and support, we are here for you.",
-    "fullName": "Full Name",
-    "email": "Email",
-    "message": "Your Message",
-    "agree": "I agree to the Terms of Service and Privacy Policy",
-    "contactUs": "Contact Us",
-    "directChat": "Direct Chat"
+  "statsCard": {
+    "currency": "SAR",
+    "liveUpdate": "Live statistics",
+    "cards": {
+      "totalUsers": "Total Users",
+      "totalProviders": "Total Providers",
+      "totalRevenue": "Total Revenue",
+      "newRegistrations": "New Registrations"
+    },
+    "errors": {
+      "forbidden": "You do not have permission to view this section.",
+      "failed": "Failed to sync data."
+    }
   },
-  
-  "about": {
-    "title": "About us",
-    "subtitle": "Know More About Skillvera"
-  },
-  "benefits": {
-    "responsable": "Responsible Team",
-    "benefit1": "Benefit",
-    "benefit2": "Benefit 2",
-    "benefit3": "Benefit 3",
-    "text": "Lorem ipsum dolor sit amet..."
-  },
-  "story": {
-    "title": "Our Story",
-    "text": "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet..."
-  },
-  "testimonials": {
-    "subtitle": "Happy Viewers",
-    "title": "Why Choose Us"
-  },
-  "rating":{
-  "title": "Guest Rating",
-  "description": "This facility is rated based on guest ratings and reviews."
-  },
-  
-  "review": {
-    "showMore": "Show More",
-    "stayed": "Stayed {nights} nights"
-  },
-  
-  "thingsToKnow": {
-    "title": "Things to know",
-    "rulesTitle": "Facility rules",
-    "policiesTitle": "Facility Policies",
-    "rules": [
-      "Leave before 12 pm",
-      "No smoking inside",
-      "No pets allowed"
-    ],
-    "policies": "Room was very clean and looked just like the photo. Quiet little hotel, especially during the day. Evening you hear some music from nearby places.",
-    "showMore": "Show More"
-  },
-  
-  "facilityMap": {
-    "title": "This Facility is in : {location}",
-    "info": "Facility Information & Features",
-    "noFeatures": "No features added yet.",
-    "popup": "Facility location ({lat}, {lng})"
-  },
-  
-  "facilityHeader": {
-    "ratingCount": "({count})",
-    "priceUnit": "{price}/DAY",
-    "overview": "Overview",
-    "share": "Share",
-    "save": "Save"
-  },
-  
-  "FacilityCalendar": {
-    "selectCheckIn": "Select check-in date",
-    "clearDates": "Clear dates",
-    "forDays": "for {count} days",
-    "checkIn": "CHECK-IN",
-    "checkOut": "CHECK-OUT",
-    "pleaseSelect": "Please select your dates to rent",
-    "rentNow": "Rent now"
-  },
-  
-  "FAQ": {
-    "title": "FAQ",
-    "subtitle": "Frequently Asked Questions",
-    "description": "Did you find the question as you expected?",
-    "readMore": "Read More",
-    "cta": "Give a Quote",
-    "items": [
-      {
-        "question": "What services do you provide?",
-        "answer": "We offer a wide range of services including web development, mobile apps, and design."
+  "FacilityChart": {
+      "title": "Facility Growth",
+      "subtitle": "Registration analysis over time",
+      "viewAll": "View All Facilities",
+      "footerNote": "Monthly statistical overview",
+      "trendPositive": "Growth Detected",
+      "trendStable": "Stable Performance",
+      "forbidden": "Access Denied",
+      "error": "Failed to load chart"
+    },
+    "Lists": {
+      "requestsTitle": "Approval Requests",
+      "requestsSubtitle": "Pending facilities review",
+      "viewAllRequests": "Review All Pending",
+      "statusPending": "Pending",
+      "statusApproved": "Approved",
+      "feedbackTitle": "Recent Feedback",
+      "feedbackSubtitle": "Latest customer reviews",
+      "viewAllFeedback": "View All Feedback",
+      "noComment": "No comment provided",
+      "noRequests": "No pending requests",
+      "noFeedback": "No feedback found",
+      "forbidden": "Access Denied",
+      "error": "Failed to sync"
+    },
+    "FacilitiesCards": {
+      "pending": "Pending Facilities",
+      "approved": "Approved Facilities",
+      "total": "Total Facilities",
+      "liveUpdate": "Live Update",
+      "forbidden": "Access Denied",
+      "error": "Failed to load stats"
+    },
+    "Home": {
+      "welcomeTitle": "Dashboard Overview",
+      "welcomeSubtitle": "Real-time insights & management"
+    },
+    "FacilityAreaChart": {
+      "title": "Registration Trend",
+      "subtitle": "Analysis of facility growth",
+      "allTime": "All Time",
+      "viewAll": "View All Facilities",
+      "growthTrend": "Consistent Growth Trend",
+      "forbidden": "Access Denied",
+      "error": "Data loading failed",
+      "last3Months": "Last 3 Months",
+      "last6Months": "Last 6 Months",
+      "lastYear": "Last 12 Months"
+        },
+        "ReservationsChart": {
+      "title": "Monthly Reservations",
+      "subtitle": "Performance across facilities",
+      "noData": "No reservation data available",
+      "updateNotice": "Updated based on latest check-ins",
+      "forbidden": "Access Denied",
+      "error": "Failed to sync reservations"
+    },
+    "Requests": {
+      "title": "New Requests",
+      "subtitle": "Facilities awaiting approval",
+      "pendingBadge": "Waiting",
+      "noRequests": "No new facility requests found",
+      "viewDetails": "View Details",
+      "viewAll": "Manage All Requests",
+      "forbidden": "Access Denied",
+      "error": "Failed to load requests"
+    },
+    "AllFacilities": {
+      "mainTitle": "Facilities Management",
+      "subTitle": "Detailed analytics & request tracking"
+    },
+    "RecentRequests": {
+      "title": "Recent Provider Requests",
+      "subtitle": "New Facilities from providers for approval",
+      "filter": "Filter",
+      "noRequests": "No pending provider requests found",
+      "review": "Review Application",
+      "viewAll": "View all Providers",
+      "forbidden": "Access Denied",
+      "error": "Loading failed"
+    },
+    "ProvidersPage": {
+      "mainTitle": "Users Directory",
+      "subTitle": "Monitor and manage service Users"
+    },
+    "ReservationsFinanceChart": {
+      "title": "Monthly Reservations",
+      "subtitle": "Performance across facilities",
+      "last3Months": "Last 3 Months",
+      "last6Months": "Last 6 Months",
+      "lastYear": "Last 12 Months",
+      "noData": "No reservation data available",
+      "updateNotice": "Updated based on latest check-ins",
+      "forbidden": "Access Denied",
+      "error": "Failed to sync reservations",
+      "viewAll": "View all Reservations"},
+      "Calendar": {
+      "title": "Facilities Timeline",
+      "subtitle": "Creation history of registered facilities",
+      "recentAdded": "Recently Added",
+      "noEvents": "No facilities registered this month"
+    },
+    "UsersTable": {
+      "title": "Account Management",
+      "subtitle": "Monitor system users and moderators",
+      "totalLabel": "Total {type}",
+      "addModerator": "Add New Moderator",
+      "loading": "Fetching data...",
+      "noDataTitle": "No data available currently",
+      "noDataSubtitle": "Try changing the filter or adding a new user",
+      "paginationInfo": "Page {current} of {total}",
+      "tabs": {
+        "provider": "Providers",
+        "user": "Users",
+        "moderator": "Moderators"
       },
-      {
-        "question": "How long does a project take?",
-        "answer": "Project duration depends on the scope, usually between 2 to 6 weeks."
+      "columns": {
+        "id": "ID",
+        "user": "User",
+        "contact": "Contact Info",
+        "status": "Status",
+        "phone": "Phone",
+        "joinedDate": "Joined Date"
+      }
+    },
+    "AddModerator": {
+      "title": "Add New Moderator",
+      "subtitle": "Create administrative access account",
+      "success": "Moderator created successfully!",
+      "errorDefault": "An unexpected error occurred.",
+      "validation": {
+        "phone": "Please enter a valid phone number with country code."
       },
-      {
-        "question": "Do you offer support after delivery?",
-        "answer": "Yes, we provide free bug fixes for 1 month and optional long-term support."
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number"
       },
-      {
-        "question": "What are your payment methods?",
-        "answer": "We accept bank transfer, PayPal, and credit card payments."
+      "placeholders": {
+        "name": "e.g. John Doe",
+        "email": "john@example.com"
       },
-      {
-        "question": "Can you work with international clients?",
-        "answer": "Yes, we collaborate with clients worldwide through remote communication tools."
-     }
-
-    ]
+      "buttons": {
+        "cancel": "Cancel",
+        "submit": "Create Account"
+      }
+    },
+    "Facilities": {
+    "title": "Facility Approval Management",
+    "subtitle": "Review and audit facility and provider data",
+    "addCategory": "Add New Category",
+    "loading": "Updating information...",
+    "noData": "No facilities found at the moment",
+    "tabs": {
+      "pending": "Pending Requests",
+      "approved": "Approved List"
+    },
+    "columns": {
+      "facility": "Facility",
+      "provider": "Provider",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "modal": {
+      "title": "Create New Category",
+      "labelEn": "Category Name (English)",
+      "labelAr": "Category Name (Arabic)",
+      "cancel": "Cancel",
+      "submit": "Save & Confirm"
+    },
+    "pagination": {
+      "page": "Page",
+      "of": "of"
+    },
+    "errors": {
+      "fetchFailed": "Failed to load data, please try again",
+      "actionFailed": "Action failed, check your permissions",
+      "categoryFailed": "Failed to create category"
+    },
+    "success": {
+      "approved": "Facility approved successfully",
+      "rejected": "Facility has been rejected",
+      "categoryCreated": "New category created successfully"
+    }
   },
   
-  "userprofile": {
-    "title": "My profile",
-    "desc": "Hosts and guests can see your profile and it may appear across Skava to help us build trust in our community",
-    "phone": "Phone",
-    "dob": "Date of Birth",
-    "location": "Current Location",
-    "gender": "Gender",
-    "genderMale": "Male",
-    "genderFemale": "Female",
-    "genderOther": "Other",
-    "save": "Get Started",
-    "fetchingLocation": "Fetching current location...",
-    "unableLocation": "Unable to fetch location",
-    "fullName":"Full Name"
+  "FacilityDetails": {
+    "back": "Back",
+    "status": "Status",
+    "locationPending": "Location Pending",
+    "arabicContent": "Arabic Content",
+    "englishContent": "English Content",
+    "gallery": "Photo Gallery",
+    "reviews": "Member Reviews",
+    "pricing": "Pricing Structure",
+    "perDay": "EGP / Day",
+    "category": "Category",
+    "agePolicy": "Age Policy",
+    "years": "Years",
+    "systemRecords": "System Records",
+    "registered": "Date Registered",
+    "activeStatus": "Active Status",
+    "online": "Online",
+    "offline": "Offline",
+    "summary": "This facility adheres to the system's approved quality standards. You can review all data through the control panel.",
+    "notFound": "Facility Not Found",
+    "fetching": "Fetching details..."
+  },
+  "VerifyOtp": {
+    "verifyTitle": "Verify Code",
+    "verifyDesc": "Enter the code sent to",
+    "otpPlaceholder": "OTP",
+    "invalidOtp": "Invalid OTP code. Please try again.",
+    "verifyButton": "Verify OTP",
+    "setPasswordTitle": "Set Password",
+    "setPasswordDesc": "Almost done! Create a new password for your account.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "passwordsMismatch": "Passwords do not match.",
+    "finishButton": "Finish Activation",
+    "activating": "Activating...",
+    "success": "Account activated successfully!",
+    "failed": "Failed to set password. Link may be expired."
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

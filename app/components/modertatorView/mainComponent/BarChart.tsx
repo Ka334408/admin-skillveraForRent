@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axiosInstance from '@/lib/axiosInstance';
 import moment from 'moment';
-import { Clock, AlertTriangle, Filter, BarChart as BarChartIcon } from "lucide-react";
+import 'moment/locale/ar';
+import { Clock, AlertTriangle, Filter, BarChart as BarChartIcon, ChevronDown, Calendar } from "lucide-react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -15,207 +16,166 @@ import {
   Cell,
 } from "recharts";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
-// Define constants
-const API_RESERVATIONS_CHART = '/dashboard-facility/reservations-chart';
 const PRIMARY_TEAL = "#0E766E";
-const BAR_COLOR_DEFAULT = "#3d5b5822"; // Light transparent teal
+const BAR_LIGHT = "#E5E7EB"; // اللون الرمادي للأعمدة غير المحددة
 
-// --- API and Chart Data Types ---
 interface ApiChartData {
   month: number;
   count: number;
 }
 
-type Point = {
-  month: string; // Formatted month name (e.g., "Jan")
-  value: number; // Reservation count
-};
-
-// Helper function to convert month number to short name
-const getMonthName = (monthNumber: number): string => {
-  return moment().month(monthNumber - 1).format('MMM');
-};
-
-// --- Custom Tooltip Component for Recharts ---
-const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-white p-2 border border-gray-200 rounded-lg shadow-lg text-sm">
-        <p className="font-semibold text-gray-700">{`Month: ${label}`}</p>
-        <p className="text-teal-700">{`Reservations: ${payload[0].value}`}</p>
-      </div>
-    );
-  }
-  return null;
-};
-
-// --- Main Component ---
+interface Point {
+  month: string;
+  value: number;
+  originalMonth: number;
+}
 
 export default function ReservationChartWrapper() {
-  const [chartData, setChartData] = useState<Point[]>([]);
+  const t = useTranslations("ReservationsFinanceChart");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+  const router = useRouter();
+  
+  moment.locale(locale);
+
+  const [rawApiData, setRawApiData] = useState<Point[]>([]);
+  const [filterRange, setFilterRange] = useState<number>(12); 
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [highlightedMonth, setHighlightedMonth] = useState<string | undefined>(undefined);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const router = useRouter();
-  const locale = useLocale();
-
-  // ----------------------
-  // 1. Data Fetching and Formatting
-  // ----------------------
   useEffect(() => {
     const fetchChartData = async () => {
-      setLoading(true);
       try {
-        const { data } = await axiosInstance.get(API_RESERVATIONS_CHART);
-
+        const { data } = await axiosInstance.get('/dashboard-facility/reservations-chart');
         if (data?.data && Array.isArray(data.data)) {
-          const formattedData: Point[] = data.data.map((item: ApiChartData) => ({
-            month: getMonthName(item.month),
+          const formatted = data.data.map((item: ApiChartData) => ({
+            month: moment().month(item.month - 1).format('MMM'),
             value: item.count,
-          }));
-
-          // Sort by month number to ensure correct chronological order
-          formattedData.sort((a, b) => {
-            // Re-calculate month number for sorting purposes
-            const monthA = moment().month(a.month, ).month();
-            const monthB = moment().month(b.month, ).month();
-            return monthA - monthB;
-          });
-
-          setChartData(formattedData);
-
-          // Set the current month to be highlighted
-          const currentMonthName = moment().format('MMM');
-          setHighlightedMonth(currentMonthName);
-
-        } else {
-          setErrorMessage("Received unexpected data format from the API.");
+            originalMonth: item.month
+          })).sort((a: any, b: any) => a.originalMonth - b.originalMonth);
+          
+          setRawApiData(formatted);
         }
       } catch (err: any) {
-        console.error('Error fetching reservations chart:', err);
-        if (err.response?.status === 403) {
-          setErrorMessage("You are not allowed to see this section.");
-        } else {
-          setErrorMessage("Failed to load reservation data.");
-        }
-        setChartData([]);
+        setErrorMessage(err.response?.status === 403 ? t("forbidden") : t("error"));
       } finally {
         setLoading(false);
       }
     };
-
     fetchChartData();
-  }, []);
+  }, [t]);
 
-  // ----------------------
-  // 2. Navigation Handler
-  // ----------------------
-  const handleViewAll = () => {
-    const role = localStorage.getItem("name") === "admin" ? "admin" : "moderator";
-    router.push(`/${locale}/${role}/AllFacilities/FacilitiesList`);
-  };
+  const filteredData = useMemo(() => {
+    return rawApiData.slice(-filterRange);
+  }, [rawApiData, filterRange]);
 
-  // ----------------------
-  // 3. Loading and Error States
-  // ----------------------
-  if (loading) {
-    return (
-      <div className="w-full p-6 bg-white rounded-2xl shadow-xl h-80 flex items-center justify-center">
-        <Clock className="w-6 h-6 mr-2 text-gray-500 animate-spin" />
-        <span className="text-gray-500">Loading reservation chart...</span>
-      </div>
-    );
-  }
+  const filterOptions = [
+    { label: t("last3Months"), value: 3 },
+    { label: t("last6Months"), value: 6 },
+    { label: t("lastYear"), value: 12 },
+  ];
 
-  if (errorMessage) {
-    return (
-      <div className="w-full p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-center font-semibold shadow-md flex items-center justify-center gap-2">
-        <AlertTriangle className="w-5 h-5" />
-        {errorMessage}
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className="w-full p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm animate-pulse h-80 flex flex-col justify-center items-center">
+      <Clock className="w-8 h-8 text-gray-200 animate-spin mb-2" />
+      <div className="h-4 bg-gray-100 w-40 rounded-full" />
+    </div>
+  );
 
-  // Check for empty data after loading
-  if (chartData.length === 0) {
-    return (
-      <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-full h-80 flex items-center justify-center">
-        <div className="text-gray-500 text-center p-8 border-dashed border-2 rounded-xl">
-          No reservation data available for the current period.
-        </div>
-      </div>
-    );
-  }
+  if (errorMessage) return (
+    <div className="w-full p-8 bg-rose-50 border border-rose-100 text-rose-700 rounded-[2rem] text-center font-bold flex items-center justify-center gap-2">
+      <AlertTriangle className="w-5 h-5" /> {errorMessage}
+    </div>
+  );
 
-  // ----------------------
-  // 4. Render Bar Chart (Integrated)
-  // ----------------------
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 w-full">
+    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 w-full relative">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 border-b pb-3">
-        <h3 className="text-xl font-extrabold text-gray-800 flex items-center gap-2">
-          <BarChartIcon className="w-5 h-5 text-teal-600" />
-          Monthly Reservation Count
-        </h3>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-gray-50 pb-5">
+        <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
+                <BarChartIcon className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-xl font-black text-gray-900">{t("title")}</h3>
+              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">{t("subtitle")}</p>
+            </div>
+        </div>
 
-        {/* Filter Button (Placeholder) */}
-        <button
-          className="flex items-center gap-1 border border-gray-300 text-gray-700 px-3 py-1.5 rounded-xl text-sm hover:bg-gray-100 transition"
-        >
-          <span>Filter</span>
-          <Filter className="w-4 h-4" />
-        </button>
+        {/* Filter Dropdown */}
+        <div className="relative">
+            <button 
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="group flex items-center gap-2 bg-gray-50 text-gray-900 px-5 py-2.5 rounded-2xl text-xs font-black hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200"
+            >
+              <Filter className="w-3.5 h-3.5 text-teal-600" />
+              <span>{filterOptions.find(opt => opt.value === filterRange)?.label}</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isFilterOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isFilterOpen && (
+                <div className="absolute top-full mt-2 right-0 w-48 bg-white border border-gray-100 shadow-2xl rounded-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
+                    {filterOptions.map((opt) => (
+                        <button
+                            key={opt.value}
+                            onClick={() => {
+                                setFilterRange(opt.value);
+                                setIsFilterOpen(false);
+                            }}
+                            className={`w-full text-left p-3 rounded-xl text-xs font-bold transition-colors ${filterRange === opt.value ? 'bg-teal-50 text-teal-700' : 'hover:bg-gray-50 text-gray-600'}`}
+                            style={{ textAlign: isRTL ? 'right' : 'left' }}
+                        >
+                            {opt.label}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
       </div>
 
       {/* Chart Area */}
-      <div style={{ width: "100%", height: 250 }}>
-        <ResponsiveContainer>
-          <BarChart
-            data={chartData}
-            margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
-          >
-            <CartesianGrid stroke="#F3F4F6" vertical={false} />
-            <XAxis
-              dataKey="month"
-              axisLine={false}
-              tickLine={false}
-              style={{ fontSize: '12px', fill: '#6B7280' }}
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={filteredData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" vertical={false} />
+            <XAxis 
+              dataKey="month" 
+              tickLine={false} 
+              axisLine={false} 
+              reversed={isRTL}
+              style={{ fontSize: '11px', fontWeight: 'bold', fill: '#9CA3AF' }} 
+              dy={10} 
             />
-            <YAxis
-              allowDecimals={false}
-              axisLine={false}
-              tickLine={false}
-              style={{ fontSize: '12px', fill: '#6B7280' }}
+            <YAxis 
+              tickLine={false} 
+              axisLine={false} 
+              orientation={isRTL ? "right" : "left"}
+              style={{ fontSize: '11px', fontWeight: 'bold', fill: '#9CA3AF' }} 
             />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="value" radius={[8, 8, 0, 0]} barSize={25}>
-              {chartData.map((item) => {
-                const isHighlighted = item.month === highlightedMonth;
-                return (
-                  <Cell
-                    key={item.month}
-                    cursor="pointer"
-                    fill={isHighlighted ? PRIMARY_TEAL : BAR_COLOR_DEFAULT}
-                  />
-                );
-              })}
+            <Tooltip
+              cursor={{ fill: '#F9FAFB', radius: 12 }}
+              contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', direction: isRTL ? 'rtl' : 'ltr' }}
+              labelStyle={{ fontWeight: 'black', marginBottom: '4px', color: '#111827' }}
+            />
+            <Bar dataKey="value" radius={[8, 8, 8, 8]} barSize={30}>
+              {filteredData.map((entry, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={index === filteredData.length - 1 ? PRIMARY_TEAL : BAR_LIGHT}
+                  className="hover:fill-[#0E766E] transition-all duration-300 cursor-pointer"
+                />
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Footer - View All */}
-      <div className="flex justify-end mt-4 pt-3 border-t border-gray-100">
-        <button
-          className={`text-sm font-medium flex items-center gap-1 text-teal-700 hover:text-[#07534e] transition`}
-          onClick={handleViewAll}
-        >
-          View all Reservations →
-        </button>
+      {/* Footer */}
+      <div className="flex justify-end mt-8 pt-6 border-t border-gray-50">
+        
       </div>
     </div>
   );

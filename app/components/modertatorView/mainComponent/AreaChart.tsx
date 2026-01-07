@@ -4,158 +4,155 @@ import {
   AreaChart,
   Area,
   XAxis,
+  YAxis,
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import { ChevronDown, Filter, Clock, AlertTriangle } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
-import React, { useEffect, useState } from 'react';
+import { ChevronDown, Filter, Clock, AlertTriangle, TrendingUp, Calendar } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '@/lib/axiosInstance';
-import moment from 'moment'; // Using moment for date formatting
+import moment from 'moment';
+import 'moment/locale/ar';
 
-// Define the primary color for reusability
 const PRIMARY_TEAL = "#0E766E";
 
-// --- Interface Definitions ---
-interface ApiChartData {
-  period_start: string;
-  count: number;
-}
-
-interface FormattedChartData {
-  month: string;
-  value: number;
-}
-
-// --- Component ---
-
 export default function FacilitiesAreaChart() {
-  const [chartData, setChartData] = useState<FormattedChartData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const t = useTranslations("FacilityAreaChart");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+  const pathname = usePathname();
 
   const router = useRouter();
-  const locale = useLocale();
 
-  // ----------------------
-  // 1. Data Fetching and Formatting
-  // ----------------------
+  moment.locale(locale);
+
+  const [rawApiData, setRawApiData] = useState<any[]>([]);
+  const [filterRange, setFilterRange] = useState<number>(12);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const isModeratorView = pathname.includes("moderator");
+
+
   useEffect(() => {
     const fetchChartData = async () => {
       try {
         const { data } = await axiosInstance.get('/dashboard-facility/chart');
-
-        if (data?.data && Array.isArray(data.data)) {
-          // Map API response to chart data format
-          const formattedData: FormattedChartData[] = data.data.map((item: ApiChartData) => ({
-            // Format the ISO date string to MMM YYYY (e.g., Oct 2025)
-            month: moment(item.period_start).format('MMM YY'),
-            value: item.count,
-          }));
-          setChartData(formattedData);
-        } else {
-          setErrorMessage("Received unexpected data format from the API.");
+        if (data?.data) {
+          setRawApiData(data.data);
         }
       } catch (err: any) {
-        console.error('Error fetching facilities chart:', err);
-        if (err.response?.status === 403) {
-          setErrorMessage("You are not allowed to see this section.");
-        } else {
-          setErrorMessage("Failed to load chart data.");
-        }
-        setChartData([]);
+        setErrorMessage(err.response?.status === 403 ? t("forbidden") : t("error"));
       } finally {
         setLoading(false);
       }
     };
-
     fetchChartData();
-  }, []);
+  }, [t]);
 
-  // ----------------------
-  // 2. Navigation Handler
-  // ----------------------
-  const handleViewAll = () => {
-    const role = localStorage.getItem("name") === "admin" ? "admin" : "moderator";
-    router.push(`/${locale}/${role}/AllFacilities/FacilitiesList`);
-  };
+  const chartData = useMemo(() => {
+    if (!rawApiData.length) return [];
 
-  // ----------------------
-  // 3. Loading and Error States
-  // ----------------------
-  if (loading) {
-    return (
-      <div className="w-full p-8 bg-white rounded-2xl shadow-xl animate-pulse h-80 flex items-center justify-center">
-        <Clock className="w-6 h-6 mr-2 text-gray-500 animate-spin" />
-        <span className="text-gray-500">Loading facility trend data...</span>
-      </div>
-    );
-  }
+    const slicedData = rawApiData.slice(-filterRange);
 
-  if (errorMessage) {
-    return (
-      <div className="w-full p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-center font-semibold shadow-md flex items-center justify-center gap-2">
-        <AlertTriangle className="w-5 h-5" />
-        {errorMessage}
-      </div>
-    );
-  }
+    return slicedData.map((item) => ({
+      month: moment(item.period_start).format('MMM YY'),
+      value: item.count,
+    }));
+  }, [rawApiData, filterRange]);
+
+  const filterOptions = [
+    { label: t("last3Months"), value: 3 },
+    { label: t("last6Months"), value: 6 },
+    { label: t("lastYear"), value: 12 },
+  ];
+
+  if (loading) return (
+    <div className="w-full p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm animate-pulse h-80 flex flex-col justify-center items-center">
+      <Clock className="w-8 h-8 text-gray-200 animate-spin mb-2" />
+      <div className="h-4 bg-gray-100 w-32 rounded-full" />
+    </div>
+  );
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-full">
+    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 w-full relative">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 border-b pb-3">
-        <h3 className="text-xl font-extrabold text-gray-800">Facility Registration Trend</h3>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-gray-50 pb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
+            <Calendar className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-xl font-black text-gray-900">{t("title")}</h3>
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">{t("subtitle")}</p>
+          </div>
+        </div>
 
-        <button className="flex items-center gap-1 border border-gray-300 text-gray-700 px-3 py-1.5 rounded-xl text-sm hover:bg-gray-100 transition">
-          <Filter className="w-4 h-4 text-gray-500" />
-          <span>All Time</span> {/* Changed 'All' to 'All Time' for clarity */}
-          <ChevronDown className="w-4 h-4" />
-        </button>
+        {/* Custom Filter Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            className="group flex items-center gap-2 bg-gray-50 text-gray-900 px-5 py-2.5 rounded-2xl text-xs font-black hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200"
+          >
+            <Filter className="w-3.5 h-3.5 text-teal-600" />
+            <span>{filterOptions.find(opt => opt.value === filterRange)?.label}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isFilterOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          {isFilterOpen && (
+            <div className="absolute top-full mt-2 right-0 w-48 bg-white border border-gray-100 shadow-2xl rounded-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
+              {filterOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => {
+                    setFilterRange(opt.value);
+                    setIsFilterOpen(false);
+                  }}
+                  className={`w-full text-left p-3 rounded-xl text-xs font-bold transition-colors ${filterRange === opt.value ? 'bg-teal-50 text-teal-700' : 'hover:bg-gray-50 text-gray-600'}`}
+                  style={{ textAlign: isRTL ? 'right' : 'left' }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Chart */}
-      <div className="h-64">
+      {/* Chart Area */}
+      <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="colorShade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={PRIMARY_TEAL} stopOpacity={0.4} />
+              <linearGradient id="colorTeal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor={PRIMARY_TEAL} stopOpacity={0.2} />
                 <stop offset="95%" stopColor={PRIMARY_TEAL} stopOpacity={0} />
               </linearGradient>
             </defs>
-
-            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
-            <XAxis dataKey="month" tickLine={false} axisLine={false} style={{ fontSize: '12px', fill: '#6B7280' }} />
-            {/* Tooltip customized for cleaner look */}
+            <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" vertical={false} />
+            <XAxis dataKey="month" tickLine={false} axisLine={false} reversed={isRTL} style={{ fontSize: '11px', fontWeight: 'bold', fill: '#9CA3AF' }} dy={10} />
+            <YAxis tickLine={false} axisLine={false} orientation={isRTL ? "right" : "left"} style={{ fontSize: '11px', fontWeight: 'bold', fill: '#9CA3AF' }} />
             <Tooltip
-              contentStyle={{
-                borderRadius: '8px',
-                border: '1px solid #E5E7EB',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-              }}
-              labelFormatter={(label) => `Month: ${label}`}
-              formatter={(value: number) => [`${value} Facilities`, 'New Registrations']}
+              contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', direction: isRTL ? 'rtl' : 'ltr' }}
+              labelStyle={{ fontWeight: 'black', marginBottom: '4px', color: '#111827' }}
             />
-
-            <Area
-              type="monotone"
-              dataKey="value"
-              stroke={PRIMARY_TEAL}
-              strokeWidth={3}
-              fill="url(#colorShade)"
-              dot={{ stroke: PRIMARY_TEAL, strokeWidth: 2, r: 4 }}
-            />
+            <Area type="monotone" dataKey="value" stroke={PRIMARY_TEAL} strokeWidth={4} fillOpacity={1} fill="url(#colorTeal)" dot={{ stroke: PRIMARY_TEAL, strokeWidth: 2, r: 4, fill: '#fff' }} activeDot={{ r: 6, strokeWidth: 0, fill: PRIMARY_TEAL }} />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
       {/* Footer */}
-      <div className="flex justify-end mt-4 pt-3 border-t border-gray-100">
-        <button className={`text-sm font-medium text-[${PRIMARY_TEAL}] hover:text-[#07534e] transition`} onClick={handleViewAll}>
-          View all Facilities →
+      <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-50">
+        <div className="flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-emerald-500" />
+          <span className="text-[11px] font-black text-gray-400 uppercase tracking-tighter">{t("growthTrend")}</span>
+        </div>
+        <button className="text-xs font-black text-[#0E766E] hover:underline flex items-center gap-1 group" 
+        onClick={() => {isModeratorView ? router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`): router.push(`/${locale}/admin/AllFacilities/FacilitiesList`)}}>
+          {t("viewAll")} <span className={`transition-transform group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`}>→</span>
         </button>
       </div>
     </div>

@@ -1,134 +1,131 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Eye, Clock, AlertTriangle, ArrowRight } from "lucide-react";
+import { Eye, Clock, AlertTriangle, ArrowRight, User, Hash } from "lucide-react";
 import axiosInstance from '@/lib/axiosInstance';
 import moment from 'moment';
+import 'moment/locale/ar';
 
-// Define API endpoint
-const API_PENDING_REQUESTS = '/dashboard-dashboard/need-approval-facilities';
 const PRIMARY_TEAL = "#0E766E";
 
-// --- Interface Definitions ---
 interface RequestItem {
   provider: {
     id: number;
     name: string;
   };
   id: number;
-  name:{en: string}; // Facility Name or Request Type
+  name: { en: string; ar: string };
   status: string;
   createdAt: string;
 }
 
 export default function FacilitiesRequestList() {
+  const t = useTranslations("Requests");
+  const locale = useLocale();
+  const router = useRouter();
+  const isRTL = locale === "ar";  const pathname = usePathname();
+  const isModeratorView = pathname.includes("moderator");
+
+
+  moment.locale(locale);
+
   const [requests, setRequests] = useState<RequestItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const router = useRouter();
-  const locale = useLocale();
-
-  // ----------------------
-  // 1. Data Fetching
-  // ----------------------
   useEffect(() => {
     const fetchRequests = async () => {
       setLoading(true);
       try {
-        // Fetch data, limiting results to, say, the top 5 for a dashboard view
-        const { data } = await axiosInstance.get(`${API_PENDING_REQUESTS}?limit=5`);
-
+        const { data } = await axiosInstance.get('/dashboard-dashboard/need-approval-facilities?limit=5');
         if (data?.data?.data) {
-          // Filter to show only PENDING status, as this component is for *New* requests
           const pendingRequests = data.data.data.filter((req: RequestItem) => req.status === 'PENDING');
           setRequests(pendingRequests);
         }
       } catch (err: any) {
-        console.error('Error fetching requests:', err);
-        setErrorMessage(
-          err.response?.status === 403
-            ? "You are not allowed to see this section."
-            : "Failed to load facility requests."
-        );
-        setRequests([]);
+        setErrorMessage(err.response?.status === 403 ? t("forbidden") : t("error"));
       } finally {
         setLoading(false);
       }
     };
     fetchRequests();
-  }, []);
+  }, [t]);
 
-  // ----------------------
-  // 2. Navigation Handler
-  // ----------------------
   const handleViewAll = () => {
-    const role = localStorage.getItem("name") === "admin" ? "admin" : "moderator";
-    router.push(`/${locale}/${role}/AllFacilities/FacilitiesList`);
+    isModeratorView?
+    router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`) :
+    router.push(`/${locale}/admin/AllFacilities/FacilitiesList`);
   };
 
-  // ----------------------
-  // 3. Render Statuses
-  // ----------------------
-  if (loading) {
-    return (
-      <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-full h-56 flex flex-col justify-center items-center">
-        <Clock className="w-6 h-6 mr-2 text-gray-500 animate-spin" />
-        <span className="text-gray-500 mt-2">Loading new requests...</span>
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 w-full h-80 flex flex-col justify-center items-center">
+      <Clock className="w-8 h-8 text-amber-200 animate-spin mb-4" />
+      <div className="h-4 bg-gray-100 w-48 rounded-full animate-pulse" />
+    </div>
+  );
 
-  if (errorMessage) {
-    return (
-      <div className="w-full p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-center font-semibold shadow-md flex items-center justify-center gap-2">
-        <AlertTriangle className="w-5 h-5" />
-        {errorMessage}
-      </div>
-    );
-  }
+  if (errorMessage) return (
+    <div className="w-full p-8 bg-rose-50 border border-rose-100 text-rose-700 rounded-[2rem] text-center font-bold flex items-center justify-center gap-2">
+      <AlertTriangle className="w-5 h-5" /> {errorMessage}
+    </div>
+  );
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-full">
+    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 w-full">
       {/* Header */}
-      <h3 className="text-xl font-extrabold text-gray-800 mb-6 border-b pb-3 flex items-center gap-2">
-        <Clock className="w-5 h-5 text-yellow-600" />
-        New Facilities Requests
-      </h3>
+      <div className="flex justify-between items-center mb-8 border-b border-gray-50 pb-5">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600">
+            <Clock className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-xl font-black text-gray-900">{t("title")}</h3>
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">{t("subtitle")}</p>
+          </div>
+        </div>
+        <span className="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-[10px] font-black uppercase">
+           {requests.length} {t("pendingBadge")}
+        </span>
+      </div>
 
       {/* List Items */}
       <div className="flex flex-col gap-4">
         {requests.length === 0 ? (
-          <div className="text-gray-500 text-center p-8 border-dashed border-2 rounded-xl">
-            No new facility requests waiting for approval.
+          <div className="text-gray-400 font-bold text-sm text-center py-12 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-100">
+            {t("noRequests")}
           </div>
         ) : (
           requests.map((req) => (
             <div
               key={req.id}
-              className="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-200 hover:bg-white transition"
+              className="group flex items-center justify-between bg-gray-50/50 p-4 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md hover:border-teal-100 transition-all duration-300"
             >
-              <div className="flex flex-col flex-1 min-w-0 pr-4">
-                {/* Request Title/Facility Name */}
-                <span className="text-sm font-semibold text-gray-800 truncate">
-                  {req.name.en || "Facility/Edit Request"}
+              <div className="flex flex-col flex-1 min-w-0">
+                <span className="text-sm font-black text-gray-800 mb-1 group-hover:text-teal-700 transition-colors">
+                  {req.name[locale as keyof typeof req.name] || req.name.en}
                 </span>
-                {/* Provider and Date */}
-                <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
-                  <span className="font-medium text-yellow-700">#{req.id}</span>
-                  <span>|</span>
-                  <span>Requested by {req.provider.name}</span>
-                  <span>|</span>
-                  <span>{moment(req.createdAt).fromNow()}</span>
+                
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400">
+                    <Hash className="w-3 h-3 text-amber-500" />
+                    <span>{req.id}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400">
+                    <User className="w-3 h-3" />
+                    <span>{req.provider.name}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-teal-600/60">
+                    <Clock className="w-3 h-3" />
+                    <span>{moment(req.createdAt).fromNow()}</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Action Button */}
               <button
-                className={`flex-shrink-0 text-gray-500 hover:text-[${PRIMARY_TEAL}] p-1 rounded-full transition`}
-                title="View Request Details"
+                className="w-10 h-10 bg-white shadow-sm border border-gray-100 flex items-center justify-center rounded-xl text-gray-400 hover:bg-[#0E766E] hover:text-white hover:border-[#0E766E] transition-all duration-300"
+                title={t("viewDetails")}
               >
                 <Eye className="w-5 h-5" />
               </button>
@@ -138,12 +135,13 @@ export default function FacilitiesRequestList() {
       </div>
 
       {/* Footer */}
-      <div className="flex justify-end mt-4 pt-3 border-t border-gray-100">
+      <div className="flex justify-end mt-8 pt-6 border-t border-gray-50">
         <button
-          className={`text-sm font-medium flex items-center gap-1 text-[${PRIMARY_TEAL}] hover:gap-2 transition-all`}
+          className="group text-xs font-black text-[#0E766E] flex items-center gap-2 hover:underline transition-all"
           onClick={handleViewAll}
         >
-          View all pending →
+          {t("viewAll")}
+          <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`} />
         </button>
       </div>
     </div>

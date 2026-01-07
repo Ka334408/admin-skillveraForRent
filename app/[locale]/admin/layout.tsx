@@ -4,7 +4,7 @@ import Sidebar from "@/app/components/adminview/mainComponent/sidebar";
 import Topbar from "@/app/components/adminview/mainComponent/topBar";
 import locale from "date-fns/locale/af";
 import { LayoutDashboard, Building2, Users, Calendar, CreditCard, BarChart, User } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
 type Props = {
@@ -13,20 +13,20 @@ type Props = {
 
 export default function ProviderLayout({ children }: Props) {
     const locale = useLocale();
+    const ts = useTranslations("Sidebar");
     const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, href: `/${locale}/admin/dashBoard` },
-    { id: "facilities", label: "ALL Facilities", icon: Building2, href: `/${locale}/admin/AllFacilities` },
-    { id: "providers", label: "Providers", icon: Users, href: `/${locale}/admin/Providers` },
-    { id: "calendar", label: "Calendar", icon: Calendar, href: `/${locale}/admin/Calander` },
-    { id: "finance", label: "Finance", icon: CreditCard, href: `/${locale}/admin/Finance` },
-    { id: "statistic", label: "Statistic", icon: BarChart, href: `/${locale}/admin/Statistics` },
-    { id: "myProfile", label: "My Profile", icon: User, href: "/providerview/statistic" },
+    { id: "dashboard", label: ts("menu.dashboard"), icon: LayoutDashboard, href: `/${locale}/admin/dashBoard` },
+    { id: "facilities", label: ts("menu.facilities"), icon: Building2, href: `/${locale}/admin/AllFacilities` },
+    { id: "providers", label: ts("menu.providers"), icon: Users, href: `/${locale}/admin/Providers` },
+    { id: "calendar", label: ts("menu.calendar"), icon: Calendar, href: `/${locale}/admin/calender` },
+    { id: "finance", label: ts("menu.finance"), icon: CreditCard, href: `/${locale}/admin/Finance` },
+    { id: "statistic", label: ts("menu.statistic"), icon: BarChart, href: `/${locale}/admin/Statistics` },
   ];
   return (
     <div className="flex min-h-screen">
       
       {/* Sidebar (يسار الشاشة) */}
-      <Sidebar menuItems={menuItems} name="Admin" />
+      <Sidebar menuItems={menuItems} />
 
       {/* يمين الشاشة: Topbar + main content */}
       <div className="flex-1 flex flex-col min-h-screen bg-gray-50">
