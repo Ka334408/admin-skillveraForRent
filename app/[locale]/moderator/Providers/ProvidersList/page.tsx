@@ -1,11 +1,11 @@
-import ProvidersTable from '@/app/components/adminview/providers/AllProvidersTable'
 
+import UnifiedUserTable from '@/app/components/modertatorView/providers/AllProvidersTable'
 import React from 'react'
 
 export default function page() {
   return (
     <div>
-      <ProvidersTable/>
+      <UnifiedUserTable/>
     </div>
   )
 }

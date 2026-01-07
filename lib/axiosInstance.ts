@@ -7,7 +7,7 @@ const MOBILE_API_URL =  "/api";
 
 // Default axios instance for web
 const api = axios.create({
-  baseURL: WEB_API_URL,
+  baseURL: "/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -34,8 +34,6 @@ api.interceptors.response.use(
 
     if (status === 403) {
       console.warn("⚠️ 403 Forbidden: User doesn't have access.");
-
-      // هنبعت رسالة للكومبوننت إن مفيش صلاحية
       error.customMessage = "You don’t have permission to view this data.";
     }
 

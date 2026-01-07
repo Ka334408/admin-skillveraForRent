@@ -1,14 +1,18 @@
 // app/[locale]/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cairo } from "next/font/google"; // تغيير الخط هنا
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import AOSProvider from "../components/AOSProvider";
 import ThemeProvider from "../components/ThemeProvider";
 import "../globals.css";
 
-
-const inter = Inter({ subsets: ["latin"] });
+// إعداد خط Cairo مع الأوزان التي قد تحتاجها
+const cairo = Cairo({ 
+  subsets: ["latin", "arabic"],
+  weight: ["300", "400", "500", "700", "900"],
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "Skillvera",
@@ -27,12 +31,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={inter.className}>
+      {/* تطبيق الخط على الـ body */}
+      <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AOSProvider>
             <ThemeProvider>
               <div className="flex flex-col min-h-screen">
-               
                 <main className="flex-1">{children}</main>
                 <div></div>
               </div>

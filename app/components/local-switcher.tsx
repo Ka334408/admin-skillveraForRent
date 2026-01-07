@@ -10,59 +10,89 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Globe } from "lucide-react";
+import { Globe, Check, ChevronDown } from "lucide-react";
 
-export default function LocaleSwitcher() {
+interface topBarProps {
+  bgColor?: string;
+  iconWidth?: string;
+  iconHeight?: string;
+  enableLabel?: string;
+  enableFlag?: string;
+}
+
+export default function LocaleSwitcher({
+  bgColor = "bg-gray-50",
+  iconHeight = "h-4",
+  iconWidth = "w-4",
+  enableLabel = "block",
+  enableFlag = "block",
+}: topBarProps) {
   const t = useTranslations("LocaleSwitcher");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleLocaleChange = (nextLocale: string) => {
-    router.replace(
-
-      { pathname },
-      { locale: nextLocale }
-    );
+    router.replace({ pathname }, { locale: nextLocale });
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#0E766E] hover:bg-white hover:text-black transition w-full text-white mt-2">
-          <Image
-            src={`/locale/${locale}.svg`}
-            alt={locale}
-            width={20}
-            height={20}
-            className="rounded-full"
-          />
-          <span className="capitalize">{t("locale", { locale })}</span>
-          <Globe className="w-4 h-4 ml-auto" />
+        <button 
+          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 group outline-none
+            ${bgColor} hover:bg-gray-100 border border-transparent hover:border-gray-200`}
+        >
+          {/* العلم الحالي */}
+          <div className={`relative w-5 h-5 overflow-hidden rounded-full border border-gray-200 ${enableFlag}`}>
+            <Image
+              src={`/locale/${locale}.svg`}
+              alt={locale}
+              fill
+              className="object-cover"
+            />
+          </div>
+          
+          <span className={`text-[13px] font-bold text-gray-700 group-hover:text-[#0E766E] transition-colors ${enableLabel}`}>
+            {locale.toUpperCase()}
+          </span>
+
+          <ChevronDown className={`${iconWidth} ${iconHeight} text-gray-400 group-hover:text-[#0E766E] transition-all`} />
         </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         align="end"
-        className="w-48 bg-[#0E766E] text-black rounded-2xl shadow-xl p-2 text-lg"
+        sideOffset={8}
+        className="w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-1.5 animate-in fade-in zoom-in-95 duration-200 z-[60]"
       >
+        <div className="px-3 py-2 text-[10px] font-black uppercase tracking-widest text-gray-400">
+          {t("select_language")}
+        </div>
+
         {locales.map((cur) => (
           <DropdownMenuItem
             key={cur}
             onClick={() => handleLocaleChange(cur)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer ${cur === locale
-                ? "bg-white text-black font-semibold"
-                : "bg-[#0E766E] hover:bg-[#0E766E]"
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer mb-1 transition-all outline-none
+              ${cur === locale
+                ? "bg-teal-50 text-[#0E766E]"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               }`}
           >
-            <Image
-              src={`/locale/${cur}.svg`}
-              alt={cur}
-              width={20}
-              height={20}
-              className="rounded-full"
-            />
-            <span className="capitalize">{t("locale", { locale: cur })}</span>
+            <div className="relative w-5 h-5 overflow-hidden rounded-full border border-gray-100">
+              <Image
+                src={`/locale/${cur}.svg`}
+                alt={cur}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <span className="text-sm font-bold flex-1">
+              {t("locale", { locale: cur })}
+            </span>
+            
+            {cur === locale && <Check size={14} className="text-[#0E766E] animate-in zoom-in" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
