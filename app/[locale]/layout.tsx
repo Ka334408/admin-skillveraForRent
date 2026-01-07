@@ -1,11 +1,16 @@
 // app/[locale]/layout.tsx
 import type { Metadata } from "next";
-import { Cairo } from "next/font/google";
+import { Cairo, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import AOSProvider from "../components/AOSProvider";
 import ThemeProvider from "../components/ThemeProvider";
 import "../globals.css";
+
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter', 
+});
 
 const cairo = Cairo({ 
   subsets: ["latin", "arabic"],
@@ -14,7 +19,7 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "Skvrent",
+  title: "admin-SKVrent",
   description: "This is a localization example",
   icons: {
     icon: "/logo.png", // Path to your favicon in public folder
@@ -34,7 +39,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={cairo.className}>
+      <body className={`${locale === 'ar' ? cairo.className : inter.className} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AOSProvider>
             <ThemeProvider>
