@@ -174,7 +174,7 @@ export default function DashboardLists({ request, feedBack }: { request?: string
                                         {isRTL ? fb.facility.name.ar : fb.facility.name.en}
                                     </p>
                                     <p className="text-[11px] text-gray-500 line-clamp-1 italic">
-                                        "{fb.comment || t("noComment")}"
+                                        &ldquo;{fb.comment || t("noComment")}&ldquo;
                                     </p>
                                 </div>
                                

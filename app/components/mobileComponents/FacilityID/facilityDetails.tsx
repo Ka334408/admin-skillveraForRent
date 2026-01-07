@@ -182,7 +182,7 @@ export default function FacilityDetailsPage() {
                                                     <p className="text-[10px] text-slate-400 font-bold">{moment(review.createdAt).fromNow()}</p>
                                                 </div>
                                             </div>
-                                            <p className="text-slate-600 text-sm italic font-medium leading-relaxed">"{review.comment}"</p>
+                                            <p className="text-slate-600 text-sm italic font-medium leading-relaxed">"=&ldquo;{review.comment}&ldquo;</p>
                                         </div>
                                         <div className="flex gap-1 mt-4">
                                             {[...Array(5)].map((_, i) => (
