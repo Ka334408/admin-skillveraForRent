@@ -28,7 +28,6 @@ export default function Topbar() {
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  // تصحيح الروابط (إضافة علامات التنصيص المفقودة)
   const menuItems = [
     { id: "dashboard", label: ts("menu.dashboard"), icon: LayoutDashboard, href: `/${locale}/moderator/dashBoard` },
     { id: "facilities", label: ts("menu.facilities"), icon: Building2, href: `/${locale}/moderator/AllFacilities` },
