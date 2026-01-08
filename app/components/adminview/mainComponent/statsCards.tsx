@@ -60,7 +60,7 @@ export default function StatsCards() {
               id: "revenue",
               title: t("cards.totalRevenue"),
               value: apiData.revenue ? `${apiData.revenue.toLocaleString()} ${t("currency")}` : `0 ${t("currency")}`,
-              icon: "/real.svg", // المسار الخاص بك
+              icon: "/real.svg", 
               chartColor: "#ffffff",
               bgColor: "bg-[#0E766E]", 
               textColor: "text-white",
@@ -101,7 +101,6 @@ export default function StatsCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-8">
       {cards.map((item) => {
-        // تحديد ما إذا كانت الأيقونة Component (Lucide) أم String (SVG path)
         const IconContent = item.icon;
         const isImageIcon = typeof IconContent === "string";
 
