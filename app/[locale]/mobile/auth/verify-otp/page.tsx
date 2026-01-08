@@ -6,6 +6,7 @@ import { Lock, CheckCircle2, Loader2, ArrowRight, ShieldCheck, Eye, EyeOff } fro
 import axiosInstance from "@/lib/axiosInstance";
 import { useTranslations, useLocale } from "next-intl";
 import toast, { Toaster } from "react-hot-toast";
+import GuestPage from "@/app/components/protectedpages/guestPage";
 
 const THEME_COLOR = "#0E766E";
 
@@ -90,6 +91,7 @@ export default function VerifyOtpPage() {
   };
 
   return (
+    <GuestPage>
     <div className={`min-h-screen bg-gray-100 flex items-center justify-center p-4 ${isRTL ? 'font-cairo' : ''}`} dir={isRTL ? "rtl" : "ltr"}>
       {/* 4. إضافة حاوية التوست في بداية الصفحة */}
       <Toaster />
@@ -194,5 +196,6 @@ export default function VerifyOtpPage() {
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
       `}</style>
     </div>
+    </GuestPage>
   );
 }
