@@ -50,6 +50,7 @@ export default function LocaleSwitcher({
               alt={locale}
               fill
               className="object-cover"
+              priority
             />
           </div>
           
@@ -86,6 +87,7 @@ export default function LocaleSwitcher({
                 alt={cur}
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <span className="text-sm font-bold flex-1">

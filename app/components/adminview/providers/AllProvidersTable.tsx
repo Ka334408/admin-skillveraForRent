@@ -153,7 +153,7 @@ export default function UnifiedUserTable() {
                           <td className={`bg-gray-50/50 p-4 ${isRTL ? 'rounded-r-xl' : 'rounded-l-xl'}`}>
                             <div className="flex items-center gap-3">
                               <div className="w-10 h-10 rounded-lg bg-white border border-gray-100 flex-shrink-0 flex items-center justify-center text-teal-600 font-black">
-                                {u.image ? <img src={`/api/media?media=${u.image}`} alt="" className="w-full h-full object-contain" /> : u.name[0]}
+                                {u.image ? <img src={`/api/media?media=${u.image}`} alt="" className="w-full h-full object-contain" loading="eager" /> : u.name[0]}
                               </div>
                               <div className="flex flex-col min-w-0">
                                 <span className="text-xs font-black text-gray-900 truncate max-w-[150px]">{u.name}</span>
@@ -183,7 +183,7 @@ export default function UnifiedUserTable() {
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="w-12 h-12 rounded-xl bg-teal-50 flex-shrink-0 flex items-center justify-center text-teal-600 font-black text-lg border border-teal-100 shadow-sm overflow-hidden">
-                           {u.image ? <img src={`/api/media?media=${u.image}`} alt="" className="w-full h-full object-contain" /> : u.name[0]}
+                           {u.image ? <img src={`/api/media?media=${u.image}`} alt="" className="w-full h-full object-contain" loading="eager" /> : u.name[0]}
                         </div>
                         <div className="flex flex-col min-w-0">
                           <span className="text-sm font-black text-gray-900 truncate">{u.name}</span>
