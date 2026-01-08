@@ -102,6 +102,7 @@ export default function StaffLoginFlip() {
               <input
                 type="email"
                 name="email"
+                autoComplete="Email"
                 placeholder={t("emailPlaceholder")}
                 className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0E766E] transition text-start"
                 required
@@ -111,6 +112,7 @@ export default function StaffLoginFlip() {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  autoComplete="current-password"
                   placeholder={t("passwordPlaceholder")}
                   className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0E766E] transition text-start"
                   required
