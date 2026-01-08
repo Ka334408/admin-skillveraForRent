@@ -34,6 +34,8 @@
       "dashboard": "Dashboard",
       "facilities": "All Facilities",
       "providers": "Providers' Requests",
+      "providersNeeds": "Providers' Requests",
+      "users": "Users",
       "Users": "Users",
       "calendar": "Calendar",
       "finance": "Finance",
@@ -46,6 +48,7 @@
     "guest": "User",
     "roleStatus": "{role} Dashboard",
     "searchPlaceholder": "Search for anything...",
+    "noResults": "No results found",
     "roles": {
       "admin": "Admin",
       "moderator": "Moderator",
