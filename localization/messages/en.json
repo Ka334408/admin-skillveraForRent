@@ -33,7 +33,7 @@
     "menu": {
       "dashboard": "Dashboard",
       "facilities": "All Facilities",
-      "providersNeeds": "Providers' Requests",
+      "providers": "Providers' Requests",
       "Users": "Users",
       "calendar": "Calendar",
       "finance": "Finance",
