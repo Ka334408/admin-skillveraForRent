@@ -123,7 +123,7 @@ export default function StatsCards() {
               
               <div className="w-11 h-11 bg-white/20 backdrop-blur-md flex items-center justify-center rounded-2xl shadow-sm overflow-hidden p-2">
                 {isImageIcon ? (
-                  <img src={IconContent} alt={item.title} className="w-full h-full object-contain brightness-0 invert" />
+                  <img src={IconContent} alt={item.title} loading="eager" className="w-full h-full object-contain brightness-0 invert" />
                 ) : (
                   <IconContent className={`w-6 h-6 ${item.textColor}`} />
                 )}

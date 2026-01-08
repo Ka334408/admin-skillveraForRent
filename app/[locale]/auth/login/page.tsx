@@ -48,9 +48,7 @@ export default function StaffLoginFlip() {
       const { user} = result.data.data;
       const token = result.data.data.accessToken;
       setUser({ ...user, type: result.userType });
-      console.log(user)
       setToken(token);
-      console.log(token)
       toast.success(t("loginSuccess"));
       router.push(`/${result.userType.toLowerCase()}/dashBoard`);
       return;
@@ -115,6 +113,7 @@ export default function StaffLoginFlip() {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  autoComplete="current-password"
                   placeholder={t("passwordPlaceholder")}
                   className="w-full border border-gray-200 text-black p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0E766E] transition text-start"
                   required

@@ -126,6 +126,7 @@ export default function StatsCards() {
                     src={IconComponent} 
                     alt="icon" 
                     className="w-7 h-7 object-contain brightness-0 invert" 
+                    loading="eager"
                   />
                 ) : (
                   <IconComponent className={`w-6 h-6 ${item.textColor}`} />

@@ -107,6 +107,7 @@ export default function FacilityDetailsPage() {
                                 src={`/api/media?media=${facility.cover}`}
                                 className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                                 alt="cover"
+                                loading="eager"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-6 left-4 right-4 md:bottom-10 md:left-10 md:right-10">
@@ -159,7 +160,7 @@ export default function FacilityDetailsPage() {
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 {facility.images?.map((img: string, i: number) => (
                                     <div key={i} className="rounded-2xl overflow-hidden border border-slate-100 hover:ring-2 ring-[#0E766E] transition-all cursor-zoom-in group relative h-40">
-                                        <img src={`/api/media?media=${img}`} alt="gallery" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                                        <img loading="eager" src={`/api/media?media=${img}`} alt="gallery" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                                     </div>
                                 ))}
                             </div>
@@ -176,7 +177,7 @@ export default function FacilityDetailsPage() {
                                     <div key={review.id} className="bg-white p-4 sm:p-6 rounded-[1.5rem] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
                                         <div>
                                             <div className="flex items-center gap-3 mb-4">
-                                                <img src={`/api/media?media=${review.user.image}`} className="w-10 h-10 rounded-full object-cover border border-slate-100" />
+                                                <img loading="eager" src={`/api/media?media=${review.user.image}`} className="w-10 h-10 rounded-full object-cover border border-slate-100" />
                                                 <div>
                                                     <h4 className="font-black text-slate-900 text-xs">{review.user.name}</h4>
                                                     <p className="text-[10px] text-slate-400 font-bold">{moment(review.createdAt).fromNow()}</p>

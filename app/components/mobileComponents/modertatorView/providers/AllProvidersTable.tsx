@@ -155,6 +155,7 @@ export default function UnifiedUserTable() {
                             <img
                               src={`/api/media?media=${u.image}`}
                               alt={u.name}
+                              loading="eager"
                               className="w-full h-full object-cover"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).style.display = 'none';
