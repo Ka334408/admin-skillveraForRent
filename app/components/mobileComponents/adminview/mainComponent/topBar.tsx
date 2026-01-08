@@ -120,7 +120,7 @@ export default function Topbar() {
 
         {/* 3. البروفايل واللوجو */}
         <div className="flex items-center gap-2 md:gap-5">
-          <div className="hidden sm:flex items-center">
+          <div className=" flex items-center">
             <LocaleSwitcher />
           </div>
 

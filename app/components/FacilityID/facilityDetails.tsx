@@ -70,15 +70,15 @@ export default function FacilityDetailsPage() {
         <div className={`min-h-screen bg-[#F4F7F6] pb-20 ${isRTL ? 'font-cairo' : ''}`} dir={isRTL ? "rtl" : "ltr"}>
 
             {/* Top Navigation Bar */}
-            <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div className=" top-0 z-0 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
                     <button onClick={() => router.back()} className="flex items-center gap-2 font-black text-slate-900 group">
                         <ChevronLeft className={`transition-transform group-hover:-translate-x-1 ${isRTL ? 'rotate-180' : ''}`} />
                         <span>{t("back")}</span>
                     </button>
 
-                    <div className="flex items-center gap-4">
-                        <div className="hidden md:flex flex-col items-end">
+                    <div className="flex items-center gap-4 z-0">
+                        <div className="flex flex-col items-end">
                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">{t("status")}</span>
                             <span className={`mt-1 text-xs font-black uppercase px-3 py-1 rounded-full ${facility.status === 'APPROVED'
                                     ? 'text-emerald-600 bg-emerald-50 border border-emerald-100'
@@ -95,27 +95,27 @@ export default function FacilityDetailsPage() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 mt-10">
-                <div className="grid grid-cols-12 gap-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8">
+                <div className="grid grid-cols-12 gap-6 md:gap-8">
 
                     {/* Main Content Area */}
                     <div className="col-span-12 lg:col-span-8 space-y-8">
 
                         {/* Hero Section */}
-                        <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 h-[450px] shadow-2xl">
+                        <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 h-[300px] sm:h-[380px] md:h-[450px] shadow-2xl">
                             <img
                                 src={`/api/media?media=${facility.cover}`}
                                 className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                                 alt="cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                            <div className="absolute bottom-10 left-10 right-10">
+                            <div className="absolute bottom-6 left-4 right-4 md:bottom-10 md:left-10 md:right-10">
                                 <div className="flex flex-wrap gap-2 mb-4">
                                     <span className="bg-orange-500 text-white px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter">
                                         {renderServerText(facility.category?.name, locale)}
                                     </span>
                                 </div>
-                                <h1 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+                                <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
                                     {renderServerText(facility.name, locale)}
                                 </h1>
                                 <div className="flex items-center gap-6 text-white/70">
@@ -128,38 +128,38 @@ export default function FacilityDetailsPage() {
                         {/* Dual Language Info Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Arabic Card */}
-                            <div className="bg-white p-8 rounded-[2rem] border-t-4 border-[#0E766E] shadow-sm">
+                            <div className="bg-white p-6 sm:p-8 rounded-[2rem] border-t-4 border-[#0E766E] shadow-sm">
                                 <div className="flex items-center gap-2 mb-6 opacity-40 uppercase tracking-[0.2em] font-black text-[10px]">
                                     <Languages size={14} /> <span>{t("arabicContent")}</span>
                                 </div>
-                                <h2 className="text-2xl font-black text-slate-900 mb-4" dir="rtl">{renderServerText(facility.name, 'ar')}</h2>
-                                <p className="text-slate-500 leading-relaxed text-sm font-medium" dir="rtl">
+                                <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-4" dir="rtl">{renderServerText(facility.name, 'ar')}</h2>
+                                <p className="text-slate-500 leading-relaxed text-sm sm:text-base font-medium" dir="rtl">
                                     {renderServerText(facility.description, 'ar')}
                                 </p>
                             </div>
 
                             {/* English Card */}
-                            <div className="bg-white p-8 rounded-[2rem] border-t-4 border-orange-500 shadow-sm">
+                            <div className="bg-white p-6 sm:p-8 rounded-[2rem] border-t-4 border-orange-500 shadow-sm">
                                 <div className="flex items-center gap-2 mb-6 opacity-40 uppercase tracking-[0.2em] font-black text-[10px]">
                                     <Languages size={14} /> <span>{t("englishContent")}</span>
                                 </div>
-                                <h2 className="text-2xl font-black text-slate-900 mb-4" dir="ltr">{renderServerText(facility.name, 'en')}</h2>
-                                <p className="text-slate-500 leading-relaxed text-sm font-medium" dir="ltr">
+                                <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-4" dir="ltr">{renderServerText(facility.name, 'en')}</h2>
+                                <p className="text-slate-500 leading-relaxed text-sm sm:text-base font-medium" dir="ltr">
                                     {renderServerText(facility.description, 'en')}
                                 </p>
                             </div>
                         </div>
 
                         {/* Gallery */}
-                        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm">
+                        <div className="bg-white p-6 sm:p-8 rounded-[2.5rem] shadow-sm">
                             <h3 className="text-xl font-black mb-8 flex items-center gap-3">
                                 <ImageIcon size={24} className="text-[#0E766E]" />
                                 {t("gallery")}
                             </h3>
-                            <div className="columns-2 md:columns-3 gap-4 space-y-4">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 {facility.images?.map((img: string, i: number) => (
-                                    <div key={i} className="rounded-2xl overflow-hidden border border-slate-100 hover:ring-2 ring-[#0E766E] transition-all cursor-zoom-in group relative">
-                                        <img src={`/api/media?media=${img}`} alt="gallery" className="w-full h-auto group-hover:scale-110 transition-transform" />
+                                    <div key={i} className="rounded-2xl overflow-hidden border border-slate-100 hover:ring-2 ring-[#0E766E] transition-all cursor-zoom-in group relative h-40">
+                                        <img src={`/api/media?media=${img}`} alt="gallery" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                                     </div>
                                 ))}
                             </div>
@@ -173,7 +173,7 @@ export default function FacilityDetailsPage() {
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {facility.rates?.map((review: any) => (
-                                    <div key={review.id} className="bg-white p-6 rounded-[1.5rem] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                                    <div key={review.id} className="bg-white p-4 sm:p-6 rounded-[1.5rem] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
                                         <div>
                                             <div className="flex items-center gap-3 mb-4">
                                                 <img src={`/api/media?media=${review.user.image}`} className="w-10 h-10 rounded-full object-cover border border-slate-100" />
@@ -182,7 +182,7 @@ export default function FacilityDetailsPage() {
                                                     <p className="text-[10px] text-slate-400 font-bold">{moment(review.createdAt).fromNow()}</p>
                                                 </div>
                                             </div>
-                                            <p className="text-slate-600 text-sm italic font-medium leading-relaxed">&ldquo;{review.comment}&ldquo;</p>
+                                            <p className="text-slate-600 text-sm sm:text-base italic font-medium leading-relaxed">&ldquo;{review.comment}&ldquo;</p>
                                         </div>
                                         <div className="flex gap-1 mt-4">
                                             {[...Array(5)].map((_, i) => (
@@ -199,7 +199,7 @@ export default function FacilityDetailsPage() {
                     <div className="col-span-12 lg:col-span-4 space-y-8">
 
                         {/* Pricing Card */}
-                        <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl shadow-slate-900/20">
+                        <div className="bg-slate-900 rounded-[2.5rem] p-6 sm:p-10 text-white relative overflow-hidden shadow-2xl shadow-slate-900/20">
                             <div className={`absolute top-0 ${isRTL ? 'left-0' : 'right-0'} p-8 opacity-10`}>
                                 <CreditCard size={120} />
                             </div>
@@ -240,7 +240,7 @@ export default function FacilityDetailsPage() {
                         </div>
 
                         {/* Records Card */}
-                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+                        <div className="bg-white rounded-[2.5rem] p-4 sm:p-8 shadow-sm border border-slate-100">
                             <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
                                 <LayoutDashboard size={14} /> {t("systemRecords")}
                             </h4>
@@ -266,8 +266,8 @@ export default function FacilityDetailsPage() {
 
                         {/* Info Summary */}
                         <div className="bg-[#0E766E] rounded-[2.5rem] p-1 shadow-xl shadow-teal-900/10">
-                            <div className="bg-white/10 backdrop-blur-md rounded-[2.3rem] p-8 text-white">
-                                <p className="text-sm font-bold leading-relaxed opacity-90">
+                            <div className="bg-white/10 backdrop-blur-md rounded-[2.3rem] p-4 sm:p-8 text-white">
+                                <p className="text-sm sm:text-base font-bold leading-relaxed opacity-90">
                                     {t("summary")}
                                 </p>
                             </div>

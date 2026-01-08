@@ -47,13 +47,13 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`md:hidden p-2.5 m-2 bg-white text-gray-500 rounded-xl fixed top-2 ${isRTL ? "right-2" : "left-2"} z-50 shadow-sm border border-gray-100`}
+        className={`lg:hidden mt-28 p-2.5 m-2 bg-slate-500 text-white rounded-xl fixed top-2 ${isRTL ? "right-2" : "left-2"} z-50 shadow-sm border border-gray-100`}
       >
         <Menu className="w-6 h-6" />
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity md:hidden ${
+        className={`fixed inset-0  z-40 bg-black/40 backdrop-blur-sm transition-opacity md:hidden ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={() => setIsOpen(false)}
@@ -72,7 +72,6 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
           <X className="w-6 h-6" />
         </button>
 
-        {/* الجزء العلوي - اللوجو والتابات */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3 mb-6 mt-2 px-2">
             <div className="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center">

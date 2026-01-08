@@ -114,43 +114,43 @@ export default function FacilitiesCards() {
       {cards.map((item) => (
         <div
           key={item.id}
-          className={`group flex flex-col justify-between ${item.bgColor} p-6 rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-44 relative overflow-hidden`}
+          className={`group flex flex-col justify-between ${item.bgColor} p-4 sm:p-6 rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 min-h-[12rem] md:h-44 relative overflow-hidden`}
         >
           {/* تأثير ضوئي خلفي */}
-          <div className={`absolute top-0 ${isRTL ? 'left-0' : 'right-0'} w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-white/20 transition-all`} />
+          <div className={`absolute top-0 ${isRTL ? 'left-0 -ml-8 md:-ml-16' : 'right-0 -mr-8 md:-mr-16'} w-32 h-32 bg-white/10 rounded-full -mt-8 md:-mt-16 blur-2xl group-hover:bg-white/20 transition-all`} />
 
           <div className="flex items-start justify-between relative z-10">
             <div>
-              <p className={`text-[11px] font-black ${item.textColor} opacity-80 uppercase tracking-widest mb-1`}>
+              <p className={`text-xs sm:text-[11px] font-black ${item.textColor} opacity-80 uppercase tracking-widest mb-1`}>
                 {item.title}
               </p>
-              <h3 className={`text-3xl font-black ${item.textColor} tracking-tight`}>
+              <h3 className={`text-2xl sm:text-3xl font-black ${item.textColor} tracking-tight`}>
                 {item.value}
               </h3>
             </div>
-            <div className="w-11 h-11 bg-white/20 backdrop-blur-md flex items-center justify-center rounded-2xl shadow-sm">
-              <item.icon className={`w-6 h-6 ${item.textColor}`} />
+            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white/20 backdrop-blur-md flex items-center justify-center rounded-2xl shadow-sm">
+              <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${item.textColor}`} />
             </div>
           </div>
 
           {/* الرسم البياني الصغير */}
-          <div className="w-full h-12 relative z-10">
+          <div className="w-full h-12 sm:h-10 md:h-12 relative z-10">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={item.chartData}>
                 <Line
                   type="monotone"
                   dataKey="value"
                   stroke={item.chartColor}
-                  strokeWidth={3}
+                  strokeWidth={2}
                   dot={false}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="flex items-center gap-1.5 relative z-10">
+           <div className="flex items-center gap-1.5 relative z-10">
              <TrendingUp className={`w-3 h-3 ${item.textColor} opacity-70`} />
-             <p className={`text-[9px] font-bold ${item.textColor} opacity-70 uppercase tracking-tighter`}>
+             <p className={`text-[9px] sm:text-[9px] font-bold ${item.textColor} opacity-70 uppercase tracking-tighter`}>
                 {t("liveUpdate")}
              </p>
           </div>

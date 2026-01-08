@@ -152,9 +152,64 @@ export default function FacilityApprovalTabs() {
         </button>
       </div>
 
-      {/* Luxury Table */}
+      {/* Responsive list: show stacked cards on small screens, table on md+ */}
       <div className="bg-white rounded-[2.5rem] border border-slate-200/60 shadow-xl shadow-slate-200/20 overflow-hidden">
-        <div className="overflow-x-auto min-h-[500px]">
+        {/* Mobile stacked cards */}
+        <div className="md:hidden p-4">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center h-48 opacity-20"><Loader2 className="w-12 h-12 animate-spin" /></div>
+          ) : facilities.length === 0 ? (
+            <div className="py-12 text-center text-slate-400 font-black">{t("noRecords")}</div>
+          ) : (
+            <div className="space-y-4">
+              {facilities.map((fac) => (
+                <div key={fac.id} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="font-black text-slate-900 text-sm">{isRTL && fac.name.ar ? fac.name.ar : fac.name.en}</div>
+                        <div className="text-[11px] font-black text-slate-400">#{fac.id}</div>
+                      </div>
+                      <div className="mt-2 text-xs text-slate-500">{fac.provider?.name || "—"}</div>
+                      <div className="mt-1 text-[11px] text-slate-400">{fac.createdAt ? moment(fac.createdAt).fromNow() : "—"}</div>
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      <button
+                        onClick={() => { isModeratorView ? router.push(`/${locale}/mobile/moderator/AllFacilities/Facility/${fac.id}`) : router.push(`/${locale}/mobile/admin/AllFacilities/Facility/${fac.id}`) }}
+                        className="p-2 bg-slate-100 text-slate-400 rounded-xl hover:bg-slate-200 transition-all shadow-sm"
+                        aria-label={t("view")}
+                      ><Eye size={16} /></button>
+
+                      {activeTab === 'pending' && (
+                        <div className="flex flex-col gap-2">
+                          <button
+                            onClick={() => handleUpdateStatus(fac.id, 'APPROVED')}
+                            disabled={processingId === fac.id}
+                            className="flex items-center justify-center w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl text-xs font-black hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100/50"
+                            title={t("actions.approve")}
+                          >
+                            {processingId === fac.id ? <Loader2 className="animate-spin w-4 h-4" /> : <Check size={14} strokeWidth={3} />}
+                          </button>
+                          <button
+                            onClick={() => handleUpdateStatus(fac.id, 'REJECTED')}
+                            disabled={processingId === fac.id}
+                            className="flex items-center justify-center w-10 h-10 bg-rose-50 text-rose-600 rounded-xl text-xs font-black hover:bg-rose-600 hover:text-white transition-all border border-rose-100/50"
+                            title={t("actions.reject")}
+                          >
+                            <X size={14} strokeWidth={3} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Desktop/Table for md+ */}
+        <div className="hidden md:block overflow-x-auto min-h-[500px]">
           {loading ? (
              <div className="flex flex-col items-center justify-center h-[500px] opacity-20"><Loader2 className="w-12 h-12 animate-spin" /></div>
           ) : (

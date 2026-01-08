@@ -47,7 +47,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`md:hidden p-2.5 m-2 bg-white text-gray-500 rounded-xl fixed top-2 ${isRTL ? "right-2" : "left-2"} z-50 shadow-sm border border-gray-100`}
+        className={`md:hidden mt-20 p-2.5 m-2 bg-white text-gray-500 rounded-xl fixed top-2 ${isRTL ? "right-2" : "left-2"} z-50 shadow-sm border border-gray-100`}
       >
         <Menu className="w-6 h-6" />
       </button>
