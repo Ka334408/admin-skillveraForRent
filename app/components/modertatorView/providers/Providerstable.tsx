@@ -58,9 +58,9 @@ export default function RecentProviderRequests() {
 
   const handleViewAll = () => {
     isModeratorView ?
-      router.push(`/${locale}/moderator/Providers/ProvidersList`)
+      router.push(`/${locale}/moderator/AllFacilities/FacilitiesList`)
       :
-      router.push(`/${locale}/admin/Providers/ProvidersList`);
+      router.push(`/${locale}/admin/AllFacilities/FacilitiesList`);
   };
   if (loading) return (
     <div className="w-full bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 h-80 flex flex-col justify-center items-center">

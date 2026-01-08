@@ -1,7 +1,7 @@
 {
   "Auth": {
-    "staffLogin": "Staff Login",
-    "emailPlaceholder": "Staff Email",
+    "staffLogin": "Dashboard Login",
+    "emailPlaceholder": "Email",
     "passwordPlaceholder": "Password",
     "loginButton": "Login",
     "authenticating": "Authenticating...",
@@ -33,7 +33,8 @@
     "menu": {
       "dashboard": "Dashboard",
       "facilities": "All Facilities",
-      "providers": "Users",
+      "providersNeeds": "Providers' Requests",
+      "Users": "Users",
       "calendar": "Calendar",
       "finance": "Finance",
       "statistic": "Statistics",
@@ -143,7 +144,7 @@
       "filter": "Filter",
       "noRequests": "No pending provider requests found",
       "review": "Review Application",
-      "viewAll": "View all Providers",
+      "viewAll": "View all Requests",
       "forbidden": "Access Denied",
       "error": "Loading failed"
     },

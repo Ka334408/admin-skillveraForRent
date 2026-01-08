@@ -58,9 +58,9 @@ export default function RecentProviderRequests() {
 
    const handleViewAll = () => {
         isModeratorView?
-        router.push(`/${locale}/mobile/moderator/Providers/ProvidersList`)
+        router.push(`/${locale}/mobile/moderator/AllFacilities/FacilitiesList`)
         :
-        router.push(`/${locale}/mobile/admin/Providers/ProvidersList`);
+        router.push(`/${locale}/mobile/admin/AllFacilities/FacilitiesList`);
     };
 
     if (loading) return (
