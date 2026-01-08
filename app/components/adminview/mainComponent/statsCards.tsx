@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users, BarChart3, TrendingUp, DollarSign } from "lucide-react";
+import { Users, BarChart3 } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer } from "recharts";
 import axiosInstance from "@/lib/axiosInstance";
 import { useTranslations } from "next-intl";
@@ -14,10 +14,10 @@ interface StatCard {
   id: string;
   title: string;
   value: string | number;
-  icon: any;
+  icon: any; // يقبل Component أو String (مسار الصورة)
   chartColor: string;
-  bgColor: string; // Tailwind class for background
-  textColor: string; // To ensure text is readable on dark backgrounds
+  bgColor: string;
+  textColor: string;
   chartData: ChartDataPoint[];
 }
 
@@ -60,7 +60,7 @@ export default function StatsCards() {
               id: "revenue",
               title: t("cards.totalRevenue"),
               value: apiData.revenue ? `${apiData.revenue.toLocaleString()} ${t("currency")}` : `0 ${t("currency")}`,
-              icon: DollarSign,
+              icon: "/real.svg", 
               chartColor: "#ffffff",
               bgColor: "bg-[#0E766E]", 
               textColor: "text-white",
@@ -99,50 +99,60 @@ export default function StatsCards() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-8">
-      {cards.map((item) => (
-        <div
-          key={item.id}
-          className={`group flex flex-col justify-between ${item.bgColor} p-6 rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-44 relative overflow-hidden`}
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-white/20 transition-all" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-8">
+      {cards.map((item) => {
+        const IconContent = item.icon;
+        const isImageIcon = typeof IconContent === "string";
 
-          <div className="flex items-start justify-between relative z-10">
-            <div>
-              <p className={`text-[11px] font-bold ${item.textColor} opacity-80 uppercase tracking-widest mb-1`}>
-                {item.title}
+        return (
+          <div
+            key={item.id}
+            className={`group flex flex-col justify-between ${item.bgColor} p-6 rounded-[2rem] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-44 relative overflow-hidden`}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-white/20 transition-all" />
+
+            <div className="flex items-start justify-between relative z-10">
+              <div>
+                <p className={`text-[11px] font-bold ${item.textColor} opacity-80 uppercase tracking-widest mb-1`}>
+                  {item.title}
+                </p>
+                <h3 className={`text-2xl font-black ${item.textColor} tracking-tight`}>
+                  {item.value}
+                </h3>
+              </div>
+              
+              <div className="w-11 h-11 bg-white/20 backdrop-blur-md flex items-center justify-center rounded-2xl shadow-sm overflow-hidden p-2">
+                {isImageIcon ? (
+                  <img src={IconContent} alt={item.title} className="w-full h-full object-contain brightness-0 invert" />
+                ) : (
+                  <IconContent className={`w-6 h-6 ${item.textColor}`} />
+                )}
+              </div>
+            </div>
+
+            <div className="w-full h-12 relative z-10">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={item.chartData}>
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke={item.chartColor}
+                    strokeWidth={3}
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="flex items-center gap-1.5 relative z-10">
+              <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              <p className={`text-[9px] font-bold ${item.textColor} opacity-70 uppercase tracking-tighter`}>
+                {t("liveUpdate")}
               </p>
-              <h3 className={`text-2xl font-black ${item.textColor} tracking-tight`}>
-                {item.value}
-              </h3>
-            </div>
-            <div className="w-11 h-11 bg-white/20 backdrop-blur-md flex items-center justify-center rounded-2xl shadow-sm">
-              <item.icon className={`w-6 h-6 ${item.textColor}`} />
             </div>
           </div>
-
-          <div className="w-full h-12 relative z-10">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={item.chartData}>
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke={item.chartColor}
-                  strokeWidth={3}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="flex items-center gap-1.5 relative z-10">
-            <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            <p className={`text-[9px] font-bold ${item.textColor} opacity-70 uppercase tracking-tighter`}>
-              {t("liveUpdate")}
-            </p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

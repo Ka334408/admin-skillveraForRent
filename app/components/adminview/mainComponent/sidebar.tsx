@@ -105,7 +105,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
         </div>
         <div className="py-4">
           <Link
-            href={isMobileView ? `/${locale}/auth/login` : `/${locale}/mobile/moderator/AllFacilities`}
+            href={isMobileView ? `/${locale}/auth/login` : `/${locale}/mobile/admin/dashBoard`}
             className="flex items-center justify-between p-3.5 bg-green-900 rounded-xl hover:bg-black transition-all group shadow-md border border-white/5"
           >
             <div className="flex items-center gap-3">

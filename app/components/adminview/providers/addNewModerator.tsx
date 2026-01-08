@@ -121,7 +121,7 @@ export default function AddModeratorModal({ isOpen, onClose, onSuccess }: Props)
             <label className="text-xs font-black text-gray-400 uppercase tracking-widest px-1">{t("fields.phone")}</label>
             <div className="phone-input-wrapper" dir="ltr"> {/* Phone always LTR */}
               <PhoneInput
-                country={"eg"}
+                country={"sa"}
                 value={formData.phone}
                 onChange={(value) => setFormData({ ...formData, phone: `+${value}` })}
                 inputStyle={{

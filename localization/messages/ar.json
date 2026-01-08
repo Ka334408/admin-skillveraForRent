@@ -34,7 +34,9 @@
       "dashboard": "لوحة التحكم",
       "facilities": "كافة المرافق",
       "providers": "طلبات المزودين",
+      "providersNeeds": "طلبات المزودين",
       "Users": "المستخدمين",
+      "users": "المستخدمين",
       "calendar": "التقويم",
       "finance": "المالية",
       "statistic": "الإحصائيات",
@@ -46,6 +48,7 @@
     "guest": "مستخدم",
     "roleStatus": "لوحة تحكم {role}",
     "searchPlaceholder": "ابحث عن أي شيء هنا...",
+    "noResults": "لم يتم العثور على نتائج",
     "roles": {
       "admin": "المدير",
       "moderator": "المشرف",
