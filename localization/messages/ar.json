@@ -1,7 +1,7 @@
 {
   "Auth": {
-    "staffLogin": "تسجيل دخول الموظفين",
-    "emailPlaceholder": "البريد الإلكتروني للموظف",
+    "staffLogin": "تسجيل دخول المشرفين",
+    "emailPlaceholder": "البريد الإلكتروني ",
     "passwordPlaceholder": "كلمة المرور",
     "loginButton": "تسجيل الدخول",
     "authenticating": "جاري التحقق...",
@@ -33,7 +33,8 @@
     "menu": {
       "dashboard": "لوحة التحكم",
       "facilities": "كافة المرافق",
-      "providers": "المستخدمين",
+      "providers": "طلبات المزودين",
+      "Users": "المستخدمين",
       "calendar": "التقويم",
       "finance": "المالية",
       "statistic": "الإحصائيات",
@@ -143,7 +144,7 @@
       "filter": "تصفية",
       "noRequests": "لا توجد طلبات مزودين قيد الانتظار",
       "review": "مراجعة الطلب",
-      "viewAll": "عرض كافة المزودين",
+      "viewAll": "عرض كافة الطلبات",
       "forbidden": "غير مسموح بالعرض",
       "error": "فشل تحميل البيانات"
     },
