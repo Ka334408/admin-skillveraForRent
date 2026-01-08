@@ -7,6 +7,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 import { useTranslations, useLocale } from "next-intl";
 import toast, { Toaster } from "react-hot-toast";
+import GuestPage from "@/app/components/protectedpages/guestPage";
 
 const THEME_COLOR = "#0E766E";
 
@@ -44,9 +45,12 @@ export default function StaffLoginFlip() {
     if (!result) result = await tryLogin(email, password, "MODERATOR");
 
     if (result?.data?.data) {
-      const { user, token } = result.data.data;
+      const { user} = result.data.data;
+      const token = result.data.data.accessToken;
       setUser({ ...user, type: result.userType });
+      console.log(user)
       setToken(token);
+      console.log(token)
       toast.success(t("loginSuccess"));
       router.push(`/${result.userType.toLowerCase()}/dashBoard`);
       return;
@@ -55,6 +59,7 @@ export default function StaffLoginFlip() {
     toast.error(t("invalidCredentials"));
     setLoading(false);
   };
+  
 
   const handleFirstTimeLoginRequest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,6 +85,7 @@ export default function StaffLoginFlip() {
   };
 
   return (
+    <GuestPage>
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4" dir={isRTL ? "rtl" : "ltr"}>
       <Toaster position="top-center" />
       <div className="relative w-full max-w-md h-[550px] perspective-1000">
@@ -188,5 +194,6 @@ export default function StaffLoginFlip() {
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
       `}</style>
     </div>
+    </GuestPage>
   );
 }

@@ -2,6 +2,7 @@
 
 import Sidebar from "@/app/components/adminview/mainComponent/sidebar";
 import Topbar from "@/app/components/adminview/mainComponent/topBar";
+import ProtectedPage from '@/app/components/protectedpages/protectedPage'
 import locale from "date-fns/locale/af";
 import { LayoutDashboard, Building2, Users, Calendar, CreditCard, BarChart, User, ClipboardList } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -35,9 +36,11 @@ export default function ProviderLayout({ children }: Props) {
         {/* Topbar */}
         <Topbar />
 
-        {/* Main content */}
+        {/* Main content (protected) */}
         <main className="flex-1 p-6 bg-gray-50">
-          {children}
+          <ProtectedPage>
+            {children}
+          </ProtectedPage>
         </main>
 
       </div>

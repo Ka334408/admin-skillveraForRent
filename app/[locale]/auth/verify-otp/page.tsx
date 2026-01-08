@@ -7,6 +7,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import { useTranslations, useLocale } from "next-intl";
 // 1. استيراد التوست
 import toast, { Toaster } from "react-hot-toast";
+import GuestPage from "@/app/components/protectedpages/guestPage";
 
 const THEME_COLOR = "#0E766E";
 
@@ -91,14 +92,13 @@ export default function VerifyOtpPage() {
   };
 
   return (
+    <GuestPage>
     <div className={`min-h-screen bg-gray-100 flex items-center justify-center p-4 ${isRTL ? 'font-cairo' : ''}`} dir={isRTL ? "rtl" : "ltr"}>
-      {/* 4. إضافة حاوية التوست في بداية الصفحة */}
-      <Toaster />
+=      <Toaster />
 
       <div className="relative w-full max-w-md h-[550px] perspective-1000">
         <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? "rotate-y-180" : ""}`}>
           
-          {/* الوجه الأمامي: OTP */}
           <div className="absolute inset-0 backface-hidden bg-white rounded-3xl shadow-2xl p-10 flex flex-col justify-center">
             <div className="flex flex-col items-center mb-8 text-center">
               <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center mb-4">
@@ -140,7 +140,6 @@ export default function VerifyOtpPage() {
             </form>
           </div>
 
-          {/* الوجه الخلفي: كلمة المرور */}
           <div className="absolute inset-0 backface-hidden bg-white rounded-3xl shadow-2xl p-10 flex flex-col justify-center rotate-y-180">
             <div className="flex flex-col items-center mb-6 text-center">
               <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
@@ -195,5 +194,6 @@ export default function VerifyOtpPage() {
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
       `}</style>
     </div>
+    </GuestPage>
   );
 }
