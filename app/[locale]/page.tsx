@@ -1,13 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 
 
 export default function HomePage() {
+    const locale = useLocale();
+    const router = useRouter();
+    const pathname = usePathname();
 
-    redirect("/auth/login")
- 
+    const isMobileView = pathname.includes("mobile");
 
-  
+    if (isMobileView) {
+        redirect(`/${locale}/mobile/auth/login`);
+    } else  {
+        redirect(`/${locale}/auth/login`)
+    }
 }

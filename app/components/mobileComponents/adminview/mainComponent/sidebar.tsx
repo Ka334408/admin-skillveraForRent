@@ -61,6 +61,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
   if (!isHydrated) return null;
 
   const isMobileView = pathname.includes("mobile");
+  const isAdminView = pathname.includes("admin");
 
   const isActive = (href: string) => {
     const normalize = (path: string) => path.replace(new RegExp(`^/${locale}`), "") || "/";
@@ -69,11 +70,11 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
 
   const handleLogout = () => {
     logout();
-    router.push(`/${locale}/auth/login`);
+    router.push(`/${locale}/mobile/auth/login`);
   };
 
   const bottomItems = [
-    { id: "support", label: t("support"), icon: HelpCircle, href: `/${locale}/providerview/support` },
+    { id: "support", label: t("support"), icon: HelpCircle, href: (isAdminView ? `/${locale}/mobile/admin/contactUs` : `/${locale}/mobile/moderator/contactUs`) },
   ];
 
   return (
@@ -149,6 +150,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
 
         <div>
           {/* زر التبديل بين وضع الويب والموبايل */}
+          { isAdminView && (
           <div className="py-4">
             <Link
               href={isMobileView ? `/${locale}/auth/login` : `/${locale}/mobile/admin/dashBoard`}
@@ -174,7 +176,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
               </div>
             </Link>
-          </div>
+          </div>)}
 
           {/* الجزء السفلي - المساعدة وتسجيل الخروج */}
           <div className="flex flex-col gap-1 pt-4 border-t border-gray-100">

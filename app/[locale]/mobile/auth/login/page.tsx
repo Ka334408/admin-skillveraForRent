@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogIn, Shield, Loader2, Eye, EyeOff, UserPlus, Mail, ArrowLeft } from "lucide-react";
-import axiosInstance from "@/lib/axiosInstance";
+import axiosInstance, { apiMobile } from "@/lib/axiosInstance";
 import { useUserStore } from "@/app/store/userStore";
 import { useTranslations, useLocale } from "next-intl";
 import toast, { Toaster } from "react-hot-toast";
@@ -26,7 +26,7 @@ export default function StaffLoginFlip() {
 
   const tryLogin = async (email: string, password: string, userType: "ADMIN" | "MODERATOR") => {
     try {
-      const res = await axiosInstance.post(`/authentication/${userType}/login`, { email, password });
+      const res = await apiMobile.post(`/authentication/${userType}/login`, { email, password });
       return { data: res.data, userType };
     } catch (err: any) {
       return null;
@@ -44,12 +44,14 @@ export default function StaffLoginFlip() {
     let result = await tryLogin(email, password, "ADMIN");
     if (!result) result = await tryLogin(email, password, "MODERATOR");
 
+
     if (result?.data?.data) {
-      const { user, token } = result.data.data;
+      const { user} = result.data.data;
+      const token = result.data.data.accessToken;
       setUser({ ...user, type: result.userType });
       setToken(token);
       toast.success(t("loginSuccess"));
-      router.push(`/${result.userType.toLowerCase()}/dashBoard`);
+      router.push(`/mobile/${result.userType.toLowerCase()}/dashBoard`);
       return;
     }
 

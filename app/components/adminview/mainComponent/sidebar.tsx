@@ -25,25 +25,21 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isHydrated, logout } = useUserStore();
 
-  // --- حل مشكلة السكرول في الخلفية نهائياً ---
   useEffect(() => {
     if (isOpen) {
-      // حفظ موضع السكرول الحالي قبل التثبيت
       const scrollY = window.scrollY;
-      
-      // تثبيت الجسم (Body) في مكانه الحالي لمنع الانزلاق
+
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      document.body.style.overflowY = 'hidden'; 
+      document.body.style.overflowY = 'hidden';
     } else {
-      // فك التثبيت واستعادة موضع السكرول
       const scrollY = document.body.style.top;
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflowY = '';
-      
+
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
       }
@@ -61,6 +57,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
   if (!isHydrated) return null;
 
   const isMobileView = pathname.includes("mobile");
+  const isAdminView = pathname.includes("admin");
 
   const isActive = (href: string) => {
     const normalize = (path: string) => path.replace(new RegExp(`^/${locale}`), "") || "/";
@@ -71,14 +68,12 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
     logout();
     router.push(`/${locale}/auth/login`);
   };
-
   const bottomItems = [
-    { id: "support", label: t("support"), icon: HelpCircle, href: `/${locale}/providerview/support` },
+    { id: "support", label: t("support"), icon: HelpCircle, href: (isAdminView ? `/${locale}/admin/contactUs` : `/${locale}/moderator/contactUs`) },
   ];
 
   return (
     <>
-      {/* زر فتح القائمة للموبايل */}
       <button
         onClick={() => setIsOpen(true)}
         className={`lg:hidden p-2.5 m-2 bg-slate-500 text-white rounded-xl fixed top-24 ${isRTL ? "right-2" : "left-2"} z-50 shadow-sm border border-gray-100`}
@@ -88,9 +83,8 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
 
       {/* الخلفية المظلمة (Overlay) */}
       <div
-        className={`fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm transition-opacity lg:hidden ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm transition-opacity lg:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={() => setIsOpen(false)}
       />
 
@@ -106,8 +100,8 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
         `}
       >
         {/* زر الإغلاق داخل السايدبار */}
-        <button 
-          onClick={() => setIsOpen(false)} 
+        <button
+          onClick={() => setIsOpen(false)}
           className={`lg:hidden absolute top-6 ${isRTL ? "left-6" : "right-6"} text-gray-400 p-2`}
         >
           <X className="w-6 h-6" />
@@ -128,7 +122,7 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
               </span>
             </div>
           </div>
-          
+
           {/* روابط التنقل */}
           <nav className="flex flex-col gap-1">
             {menuItems.map(({ id, label, icon: Icon, href }) => (
@@ -149,34 +143,34 @@ export default function Sidebar({ menuItems }: { menuItems: any[] }) {
 
         <div>
           {/* زر التبديل بين وضع الويب والموبايل */}
-          <div className="py-4">
-            <Link
-              href={isMobileView ? `/${locale}/auth/login` : `/${locale}/mobile/admin/dashBoard`}
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between p-3.5 bg-green-900 rounded-xl hover:bg-black transition-all group shadow-md border border-white/5"
-            >
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-white/10 rounded-lg group-hover:rotate-12 transition-transform">
-                  <ArrowRightLeft className="w-4 h-4 text-teal-400" />
+          {isAdminView && (
+            <div className="py-4">
+              <Link
+                href={isMobileView ? `/${locale}/auth/login` : `/${locale}/mobile/admin/dashBoard`}
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3.5 bg-green-900 rounded-xl hover:bg-black transition-all group shadow-md border border-white/5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/10 rounded-lg group-hover:rotate-12 transition-transform">
+                    <ArrowRightLeft className="w-4 h-4 text-teal-400" />
+                  </div>
+                  <div className="flex flex-col text-start">
+                    <span className="text-[10px] font-bold text-gray-400 leading-none mb-1">
+                      {t("switch_to")}
+                    </span>
+                    <span className="text-[13px] font-black text-white uppercase tracking-tight">
+                      {isMobileView ? t("web_site_mode") : t("mobile_app_mode")}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col text-start">
-                  <span className="text-[10px] font-bold text-gray-400 leading-none mb-1">
-                    {t("switch_to")}
-                  </span>
-                  <span className="text-[13px] font-black text-white uppercase tracking-tight">
-                    {isMobileView ? t("web_site_mode") : t("mobile_app_mode")}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
-              </div>
-            </Link>
-          </div>
 
-          {/* الجزء السفلي - المساعدة وتسجيل الخروج */}
+                <div className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+                </div>
+              </Link>
+            </div>
+          )}
           <div className="flex flex-col gap-1 pt-4 border-t border-gray-100">
             {bottomItems.map(({ id, label, icon: Icon, href }) => (
               <Link
