@@ -128,7 +128,7 @@ export default function ContactUsMessages() {
                     <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100 relative">
                       <MessageSquare size={20} className="absolute -top-3 -inline-start-3 text-teal-100" />
                       <p className="text-gray-700 font-medium text-sm leading-relaxed italic">
-                        "{msg.message}"
+                        &quot;{msg.message}&quot;
                       </p>
                     </div>
                   </div>
