@@ -4,11 +4,11 @@ import { useEffect, useState, useCallback } from "react";
 import axiosInstance from "@/lib/axiosInstance";
 import {
   Loader2, ChevronLeft, ChevronRight, Users,
-  ShieldCheck, UserCog, Plus, Mail, Phone, Calendar as CalendarIcon,
-  FilterX
+  ShieldCheck, UserCog, Mail, Phone, Calendar as CalendarIcon,
+  FilterX, CheckCircle
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl"; 
-
+import toast from "react-hot-toast";
 
 type UserType = "PROVIDER" | "USER" | "MODERATOR";
 
@@ -23,6 +23,8 @@ export default function UnifiedUserTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+
   const itemsPerPage = 10;
 
   const fetchUsers = useCallback(async () => {
@@ -42,6 +44,20 @@ export default function UnifiedUserTable() {
   }, [currentPage, activeTab]);
 
   useEffect(() => { fetchUsers(); }, [fetchUsers]);
+
+  const handleApproveProvider = async (id: string) => {
+    try {
+      setActionLoading(id);
+      await axiosInstance.post(`/moderator-providers/${id}/approve`);
+      toast.success(isRTL ? "تم تفعيل الحساب بنجاح" : "Account activated successfully");
+      fetchUsers();
+    } catch (error: any) {
+      console.error("Approve Error:", error);
+      toast.error(error.response?.data?.message || "Error");
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   const handleTabChange = (type: UserType) => {
     setActiveTab(type);
@@ -69,8 +85,7 @@ export default function UnifiedUserTable() {
 
   return (
     <div className={`w-full px-4 md:px-8 py-8 min-h-screen bg-[#F8FAFC] ${isRTL ? 'font-cairo' : ''}`} dir={isRTL ? "rtl" : "ltr"}>
-    
-
+      
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
         <div className={isRTL ? "text-right" : "text-left"}>
@@ -88,8 +103,6 @@ export default function UnifiedUserTable() {
             </span>
             <span className="text-xl font-black text-teal-600">{totalCount}</span>
           </div>
-
-          
         </div>
       </div>
 
@@ -154,16 +167,11 @@ export default function UnifiedUserTable() {
                           {u.image ? (
                             <img
                               src={`/api/media?media=${u.image}`}
-                              loading="eager"
                               alt={u.name}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).style.display = 'none';
-                                (e.target as HTMLImageElement).parentElement!.innerHTML = u.name.charAt(0).toUpperCase();
-                              }}
+                              className="w-full h-full object-contain"
                             />
                           ) : (
-                            <span>{u.name.charAt(0).toUpperCase()}</span>
+                            <span>{u.name?.charAt(0).toUpperCase()}</span>
                           )}
                         </div>
 
@@ -183,12 +191,26 @@ export default function UnifiedUserTable() {
                       </div>
                     </td>
                     <td className="bg-gray-50/50 py-5 px-6 border-y border-transparent group-hover:border-gray-100 group-hover:bg-white text-center">
-                      <span className={`inline-flex px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider ${u.status === "ACTIVE"
-                          ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
-                          : "bg-amber-50 text-amber-600 border border-amber-100"
-                        }`}>
-                        {u.status || "PENDING"}
-                      </span>
+                      <div className="flex flex-col items-center gap-2">
+                        <span className={`inline-flex px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider ${u.status === "ACTIVE"
+                            ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
+                            : "bg-amber-50 text-amber-600 border border-amber-100"
+                          }`}>
+                          {u.status || "PENDING"}
+                        </span>
+                        
+                        {/* زر الموافقة للبروفايدر الـ PENDING */}
+                        {activeTab === "PROVIDER" && u.status === "PENDING" && (
+                          <button
+                            onClick={() => handleApproveProvider(u.id)}
+                            disabled={actionLoading === u.id}
+                            className="flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1 rounded-lg text-[10px] font-black hover:bg-emerald-700 transition-all disabled:opacity-50 shadow-sm"
+                          >
+                            {actionLoading === u.id ? <Loader2 size={12} className="animate-spin" /> : <CheckCircle size={12} />}
+                            {isRTL ? "تفعيل" : "Activate"}
+                          </button>
+                        )}
+                      </div>
                     </td>
                     <td className="bg-gray-50/50 py-5 px-6 border-y border-transparent group-hover:border-gray-100 group-hover:bg-white text-center">
                       <div className="inline-flex items-center gap-2 text-xs font-black text-gray-600">

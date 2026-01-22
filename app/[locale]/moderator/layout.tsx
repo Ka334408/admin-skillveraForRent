@@ -18,8 +18,8 @@ export default function ProviderLayout({ children }: Props) {
   const menuItems = [
     { id: "dashboard", label: ts("menu.dashboard"), icon: LayoutDashboard, href: `/${locale}/moderator/dashBoard` },
     { id: "facilities", label: ts("menu.facilities"), icon: Building2, href: `/${locale}/moderator/AllFacilities` },
-    { id: "providers", label: ts("menu.providersNeeds"), icon: ClipboardList, href: `/${locale}/admin/Providers` },
-    { id: "Users", label: ts("menu.users"), icon: Users, href: `/${locale}/admin/Providers/ProvidersList` },
+    { id: "providers", label: ts("menu.providersNeeds"), icon: ClipboardList, href: `/${locale}/moderator/Providers` },
+    { id: "Users", label: ts("menu.users"), icon: Users, href: `/${locale}/moderator/Providers/ProvidersList` },
     { id: "calendar", label: ts("menu.calendar"), icon: Calendar, href: `/${locale}/moderator/calender` },
     { id: "finance", label: ts("menu.finance"), icon: CreditCard, href: `/${locale}/moderator/Finance` },
     { id: "statistic", label: ts("menu.statistic"), icon: BarChart, href: `/${locale}/moderator/statistics` },
