@@ -25,7 +25,7 @@ export default function GuestPage({ children }: { children: React.ReactNode }) {
         if (isMobileView) {
           router.replace(`/${locale}/mobile/${user.user?.type.toLowerCase()}/dashBoard`);
         } else {
-          router.replace(`/${locale}/admin/dashBoard`);
+          router.replace(`/${locale}/${user.user?.type.toLowerCase()}/dashBoard`);
         }
       } else {
         setLoading(false);
