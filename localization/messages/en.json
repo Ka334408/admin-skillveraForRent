@@ -101,7 +101,9 @@
       "total": "Total Facilities",
       "liveUpdate": "Live Update",
       "forbidden": "Access Denied",
-      "error": "Failed to load stats"
+      "error": "Failed to load stats",
+      "noRecords": "No facilities found"
+
     },
     "Home": {
       "welcomeTitle": "Dashboard Overview",
