@@ -22,10 +22,8 @@ export default function GuestPage({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (user.token) {
-        if (isMobileView && isModeratorView) {
-          router.replace(`/${locale}/mobile/moderator/dashBoard`);
-        } else if (isMobileView && !isModeratorView) {
-          router.replace(`/${locale}/mobile/admin/dashBoard`);
+        if (isMobileView) {
+          router.replace(`/${locale}/mobile/${user.user?.type.toLowerCase()}/dashBoard`);
         } else {
           router.replace(`/${locale}/admin/dashBoard`);
         }
