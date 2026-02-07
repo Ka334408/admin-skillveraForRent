@@ -15,12 +15,16 @@ export default function GuestPage({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const isMobileView = pathname.includes("mobile");
+  const isModeratorView = pathname.includes("moderator")
+
 
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (user.token) {
-        if (isMobileView) {
+        if (isMobileView && isModeratorView) {
+          router.replace(`/${locale}/mobile/moderator/dashBoard`);
+        } else if (isMobileView && !isModeratorView) {
           router.replace(`/${locale}/mobile/admin/dashBoard`);
         } else {
           router.replace(`/${locale}/admin/dashBoard`);

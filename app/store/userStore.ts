@@ -22,6 +22,7 @@ interface User {
 interface UserStore {
   user: User | null;
   token: string | null;
+  type: string | null;
 
   // local-only image file (NOT persisted)
   newImageFile: File | null;
@@ -55,6 +56,7 @@ export const useUserStore = create<UserStore>()(
     (set) => ({
       user: null,
       token: null,
+      type: null,
 
       newImageFile: null,
 
