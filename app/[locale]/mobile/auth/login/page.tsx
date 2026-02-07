@@ -48,10 +48,10 @@ export default function StaffLoginFlip() {
     if (result?.data?.data) {
       const { user} = result.data.data;
       const token = result.data.data.accessToken;
-      setUser({ ...user, type: result.userType });
+      setUser({ ...user, type: user.type });
       setToken(token);
       toast.success(t("loginSuccess"));
-      router.push(`/mobile/${result.userType.toLowerCase()}/dashBoard`);
+      router.push(`/mobile/${user.type.toLowerCase()}/dashBoard`);
       return;
     }
 
